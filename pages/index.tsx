@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AddressData, GeocodeResponse, GradientMap, WeatherData } from '@/types';
+import { AddressData, GeocodeResponse, WeatherData } from '@/types';
 import gradients from '@/components/Gradiants';
 import styles from '@/styles/Home.module.sass';
 import conditions from '@/components/Conditions';
