@@ -118,11 +118,12 @@ export default function Home() {
                 <dd>
                   <div>
                     <span>
-                      <strong>미세먼지 {getPm10Status(weatherData.pm10).text}</strong>
+                      <strong style={{ color: getPm10Status(weatherData.pm10).color }}>
+                        미세먼지 {getPm10Status(weatherData.pm10).text}
+                      </strong>
                       <em
                         style={{
                           background: `linear-gradient(-135deg, ${gradientItems})`,
-                          color: getPm10Status(weatherData.pm10).color,
                         }}
                       >
                         {weatherData.pm10} ㎍/㎥
@@ -131,11 +132,12 @@ export default function Home() {
                   </div>
                   <div>
                     <span>
-                      <strong>초미세먼지 {getPm25Status(weatherData.pm2_5).text}</strong>
+                      <strong style={{ color: getPm25Status(weatherData.pm2_5).color }}>
+                        초미세먼지 {getPm25Status(weatherData.pm2_5).text}
+                      </strong>
                       <em
                         style={{
                           background: `linear-gradient(-135deg, ${gradientItems})`,
-                          color: getPm25Status(weatherData.pm2_5).color,
                         }}
                       >
                         {weatherData.pm2_5} ㎍/㎥
