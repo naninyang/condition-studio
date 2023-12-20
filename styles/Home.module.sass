@@ -17,8 +17,13 @@
       position: absolute
       bottom: rem(-100)
       right: rem(-100)
+      width: rem(370)
+      height: rem(370)
 
       i
+        position: absolute
+        top: 0
+        left: 0
         font-size: rem(370)
         font-style: normal
         color: $hex-white
@@ -40,6 +45,7 @@
       display: flex
       flex-direction: column
       gap: rem(25)
+      margin-top: rem(52)
 
       dt
         +screen-reader-only
@@ -60,6 +66,8 @@
           font-size: rem(20)
 
           i
+            -webkit-background-clip: text !important
+            -webkit-text-fill-color: transparent
             font-style: normal
 
           span
@@ -70,5 +78,7 @@
               font-weight: 700
 
             em
+              -webkit-background-clip: text !important
+              -webkit-text-fill-color: transparent
               font-style: normal
-              font-weight: 200
+              font-weight: 300

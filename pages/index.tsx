@@ -3,6 +3,7 @@ import { AddressData, GeocodeResponse, GradientMap, WeatherData } from '@/types'
 import gradients from '@/components/Gradiants';
 import styles from '@/styles/Home.module.sass';
 import conditions from '@/components/Conditions';
+import { getPm10Status, getPm25Status } from '@/components/Polutions';
 
 export default function Home() {
   const [seoulDate, setSeoulDate] = useState<string>('');
@@ -85,7 +86,7 @@ export default function Home() {
           <header>
             <p>
               <span>
-                {seoulDate} {seoulTime} 업데이트 기준
+                {seoulDate} {seoulTime}
               </span>{' '}
               {addressData.sido_nm} {addressData.sgg_nm} {addressData.adm_nm}
             </p>
@@ -96,12 +97,18 @@ export default function Home() {
                 <dt>날씨 컨디션</dt>
                 <dd>
                   <div>
-                    <i className="icon" aria-hidden>
+                    <i
+                      className="icon"
+                      style={{ background: `linear-gradient(-135deg, ${gradientItems})` }}
+                      aria-hidden
+                    >
                       {iconCode && getResult(weatherData.is_day, parseInt(iconCode))}
                     </i>
                     <span>
                       <strong>{weatherData.text}</strong>
-                      <em>{weatherData.temp_c} °C</em>
+                      <em style={{ background: `linear-gradient(-135deg, ${gradientItems})` }}>
+                        {weatherData.temp_c} °C
+                      </em>
                     </span>
                   </div>
                 </dd>
@@ -111,14 +118,28 @@ export default function Home() {
                 <dd>
                   <div>
                     <span>
-                      <strong>미세먼지</strong>
-                      <em>{weatherData.pm10} ㎍/㎥</em>
+                      <strong>미세먼지 {getPm10Status(weatherData.pm10).text}</strong>
+                      <em
+                        style={{
+                          background: `linear-gradient(-135deg, ${gradientItems})`,
+                          color: getPm10Status(weatherData.pm10).color,
+                        }}
+                      >
+                        {weatherData.pm10} ㎍/㎥
+                      </em>
                     </span>
                   </div>
                   <div>
                     <span>
-                      <strong>초미세먼지</strong>
-                      <em>{weatherData.pm2_5} ㎍/㎥</em>
+                      <strong>초미세먼지 {getPm25Status(weatherData.pm2_5).text}</strong>
+                      <em
+                        style={{
+                          background: `linear-gradient(-135deg, ${gradientItems})`,
+                          color: getPm25Status(weatherData.pm2_5).color,
+                        }}
+                      >
+                        {weatherData.pm2_5} ㎍/㎥
+                      </em>
                     </span>
                   </div>
                 </dd>
