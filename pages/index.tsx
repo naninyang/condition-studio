@@ -43,19 +43,7 @@ export default function Home() {
 
           const weatherResponse = await fetch(`/api/weather?q=${latitude},${longitude}`);
           const weatherData = await weatherResponse.json();
-          setWeatherData({
-            temp_c: weatherData.current.temp_c,
-            feelslike_c: weatherData.current.feelslike_c,
-            is_day: weatherData.current.is_day,
-            wind_kph: weatherData.current.wind_kph,
-            precip_mm: weatherData.current.precip_mm,
-            humidity: weatherData.current.humidity,
-            pm2_5: weatherData.current.air_quality.pm2_5,
-            pm10: weatherData.current.air_quality.pm10,
-            text: weatherData.current.condition.text,
-            icon: weatherData.current.condition.icon,
-            code: weatherData.current.condition.code,
-          });
+          setWeatherData(weatherData);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -65,7 +53,8 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const originalIconUrl = weatherData?.icon;
+  console.log('weatherData: ', weatherData);
+  const originalIconUrl = weatherData?.current.condition.icon;
   const iconCode = originalIconUrl ? originalIconUrl.split('/').pop()?.split('.')[0] : undefined;
 
   const getGradient = (code: number, isDay: number): string => {
@@ -73,8 +62,8 @@ export default function Home() {
     return isDay ? gradient.day : gradient.night;
   };
 
-  const gradientItems = weatherData && getGradient(weatherData.code, weatherData.is_day);
-  const getResult = (isDay: number, iconCode: number): string => {
+  const gradientItems = weatherData && getGradient(weatherData.current.code, weatherData.current.is_day);
+  const getIcon = (isDay: number, iconCode: number): string => {
     return conditions[`${isDay}_${iconCode}`];
   };
 
@@ -97,17 +86,19 @@ export default function Home() {
                 <dt>날씨 컨디션</dt>
                 <dd>
                   <div>
-                    <i
-                      className="icon"
-                      style={{ background: `linear-gradient(-135deg, ${gradientItems})` }}
-                      aria-hidden
-                    >
-                      {iconCode && getResult(weatherData.is_day, parseInt(iconCode))}
-                    </i>
+                    {iconCode && (
+                      <i
+                        className="icon"
+                        style={{ background: `linear-gradient(-135deg, ${gradientItems})` }}
+                        aria-hidden
+                      >
+                        {getIcon(weatherData.current.is_day, parseInt(iconCode))}
+                      </i>
+                    )}
                     <span>
-                      <strong>{weatherData.text}</strong>
+                      <strong>{weatherData.current.condition.text}</strong>
                       <em style={{ background: `linear-gradient(-135deg, ${gradientItems})` }}>
-                        {weatherData.temp_c} °C
+                        {weatherData.current.temp_c} °C
                       </em>
                     </span>
                   </div>
@@ -118,39 +109,41 @@ export default function Home() {
                 <dd>
                   <div>
                     <span>
-                      <strong style={{ color: getPm10Status(weatherData.pm10).color }}>
-                        미세먼지 {getPm10Status(weatherData.pm10).text}
+                      <strong style={{ color: getPm10Status(weatherData.current.air_quality.pm10).color }}>
+                        미세먼지 {getPm10Status(weatherData.current.air_quality.pm10).text}
                       </strong>
                       <em
                         style={{
                           background: `linear-gradient(-135deg, ${gradientItems})`,
                         }}
                       >
-                        {weatherData.pm10} ㎍/㎥
+                        {weatherData.current.air_quality.pm10} ㎍/㎥
                       </em>
                     </span>
                   </div>
                   <div>
                     <span>
-                      <strong style={{ color: getPm25Status(weatherData.pm2_5).color }}>
-                        초미세먼지 {getPm25Status(weatherData.pm2_5).text}
+                      <strong style={{ color: getPm25Status(weatherData.current.air_quality.pm2_5).color }}>
+                        초미세먼지 {getPm25Status(weatherData.current.air_quality.pm2_5).text}
                       </strong>
                       <em
                         style={{
                           background: `linear-gradient(-135deg, ${gradientItems})`,
                         }}
                       >
-                        {weatherData.pm2_5} ㎍/㎥
+                        {weatherData.current.air_quality.pm2_5} ㎍/㎥
                       </em>
                     </span>
                   </div>
                 </dd>
               </div>
-              <div className={styles['background-condition']}>
-                <i className="icon" aria-hidden>
-                  {iconCode && getResult(weatherData.is_day, parseInt(iconCode))}
-                </i>
-              </div>
+              {iconCode && (
+                <div className={styles['background-condition']}>
+                  <i className="icon" aria-hidden>
+                    {getIcon(weatherData.current.is_day, parseInt(iconCode))}
+                  </i>
+                </div>
+              )}
             </dl>
           )}
         </section>

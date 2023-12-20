@@ -23,17 +23,28 @@ export interface AddressData {
 }
 
 export interface WeatherData {
-  temp_c: number;
-  feelslike_c: number;
-  is_day: number;
-  wind_kph: number;
-  precip_mm: number;
-  humidity: number;
-  pm2_5: number;
-  pm10: number;
-  text: string;
-  icon: string;
-  code: number;
+  current: {
+    temp_c: number;
+    feelslike_c: number;
+    is_day: number;
+    wind_kph: number;
+    precip_mm: number;
+    humidity: number;
+    pm2_5: number;
+    pm10: number;
+    text: string;
+    icon: string;
+    code: number;
+    air_quality: {
+      pm2_5: number;
+      pm10: number;
+    };
+    condition: {
+      code: number;
+      icon: string;
+      text: string;
+    };
+  };
 }
 
 export interface GradientColors {
