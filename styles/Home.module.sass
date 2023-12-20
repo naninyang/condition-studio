@@ -1,1 +1,74 @@
+@import './designSystem'
+
 .main
+  .background
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
+  section
+    overflow: hidden
+    position: relative
+    min-height: 100dvh
+
+    .background-condition
+      position: absolute
+      bottom: rem(-100)
+      right: rem(-100)
+
+      i
+        font-size: rem(370)
+        font-style: normal
+        color: $hex-white
+
+    header
+      display: flex
+      justify-content: space-between
+      align-items: center
+      padding: rem(25)
+
+      p
+        display: flex
+        flex-direction: column
+        font-size: rem(14)
+        font-weight: 900
+        line-height: 1.42857143
+
+    dl
+      display: flex
+      flex-direction: column
+      gap: rem(25)
+
+      dt
+        +screen-reader-only
+
+      dd
+        display: inline-flex
+        flex-direction: column
+        justify-content: center
+        border-radius: 0 rem(26)rem(26) 0
+        padding: rem(12) rem(50) rem(12) rem(25)
+        background-color: $hex-white
+        color: $hex-item
+
+        div
+          display: flex
+          align-items: center
+          gap: rem(5)
+          font-size: rem(20)
+
+          i
+            font-style: normal
+
+          span
+            display: flex
+            gap: rem(17)
+
+            strong
+              font-weight: 700
+
+            em
+              font-style: normal
+              font-weight: 200
