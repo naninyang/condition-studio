@@ -37,6 +37,7 @@ export default function Home() {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      weekday: 'short',
       timeZone: 'Asia/Seoul',
     }).format(now);
     const seoulTimeFormatted = new Intl.DateTimeFormat('ko-KR', {
