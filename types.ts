@@ -30,11 +30,7 @@ export interface WeatherData {
     wind_kph: number;
     precip_mm: number;
     humidity: number;
-    pm2_5: number;
-    pm10: number;
-    text: string;
-    icon: string;
-    code: number;
+    wind_dir: string;
     air_quality: {
       pm2_5: number;
       pm10: number;
@@ -43,6 +39,48 @@ export interface WeatherData {
       code: number;
       icon: string;
       text: string;
+    };
+  };
+  forecast: {
+    forecastday: {
+      date: string;
+      day: {
+        maxtemp_c: number;
+        mintemp_c: number;
+        maxwind_kph: number;
+        totalprecip_mm: number;
+        totalsnow_cm: number;
+        avgvis_km: number;
+        avghumidity: number;
+        daily_will_it_rain: number;
+        daily_chance_of_rain: number;
+        daily_will_it_snow: number;
+        daily_chance_of_snow: number;
+      };
+      astro: {
+        sunrise: string;
+        sunset: string;
+        moonrise: string;
+        moonset: string;
+        moon_phase: string;
+        moon_illumination: number;
+      };
+      hour: {
+        time: string;
+        temp_c: number;
+        is_day: number;
+        wind_kph: number;
+        wind_dir: string;
+        precip_mm: number;
+        humidity: number;
+        feelslike_c: number;
+        dewpoint_c: number;
+        daily_will_it_rain: number;
+        daily_chance_of_rain: number;
+        daily_will_it_snow: number;
+        daily_chance_of_snow: number;
+        vis_km: number;
+      };
     };
   };
 }

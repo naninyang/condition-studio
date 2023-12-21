@@ -77,13 +77,13 @@ export default function Home() {
     const gradient = gradients[code] || gradients[1000];
     return isDay ? gradient.day : gradient.night;
   };
-  const gradientItems = weatherData && getGradient(weatherData.current.code, weatherData.current.is_day);
+  const gradientItems = weatherData && getGradient(weatherData.current.condition.code, weatherData.current.is_day);
 
   const getColors = (code: number, isDay: number): string => {
     const color = colors[code] || colors[1000];
     return isDay ? color.day : color.night;
   };
-  const colorItems = weatherData && getColors(weatherData.current.code, weatherData.current.is_day);
+  const colorItems = weatherData && getColors(weatherData.current.condition.code, weatherData.current.is_day);
 
   const getIcon = (isDay: number, iconCode: number): string => {
     return conditions[`${isDay}_${iconCode}`];
@@ -123,6 +123,36 @@ export default function Home() {
                     <span>
                       <strong>{weatherData.current.condition.text}</strong>
                       {colorItems && <Unit colorItems={colorItems}>{weatherData.current.temp_c} °C</Unit>}
+                    </span>
+                  </div>
+                </dd>
+              </div>
+              {weatherData.current.precip_mm !== 0 && (
+                <div>
+                  <dt>강수량</dt>
+                  <dd>
+                    <div>
+                      <i className="icon" aria-hidden>
+                        `
+                      </i>
+                      <span>
+                        <strong>강수량</strong>
+                        <em>{weatherData.current.precip_mm} mm</em>
+                      </span>
+                    </div>
+                  </dd>
+                </div>
+              )}
+              <div>
+                <dt>습도</dt>
+                <dd>
+                  <div>
+                    <i className="icon" aria-hidden>
+                      -
+                    </i>
+                    <span>
+                      <strong>습도</strong>
+                      <em>{weatherData.current.humidity} %</em>
                     </span>
                   </div>
                 </dd>
