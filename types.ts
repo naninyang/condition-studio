@@ -42,7 +42,7 @@ export interface WeatherData {
     };
   };
   forecast: {
-    forecastday: {
+    forecastday: Array<{
       date: string;
       day: {
         maxtemp_c: number;
@@ -65,7 +65,7 @@ export interface WeatherData {
         moon_phase: string;
         moon_illumination: number;
       };
-      hour: {
+      hour: Array<{
         time: string;
         temp_c: number;
         is_day: number;
@@ -80,8 +80,8 @@ export interface WeatherData {
         daily_will_it_snow: number;
         daily_chance_of_snow: number;
         vis_km: number;
-      };
-    };
+      }>;
+    }>;
   };
 }
 
