@@ -66,9 +66,15 @@
           font-size: rem(20)
 
           i
-            -webkit-background-clip: text !important
-            -webkit-text-fill-color: transparent
             font-style: normal
+
+            &:not(.icon)
+              display: block
+              background-repeat: no-repeat
+              background-position: 50% 50%
+              background-size: contain
+              width: rem(20)
+              height: rem(20)
 
           span
             display: flex
@@ -78,7 +84,5 @@
               font-weight: 700
 
             em
-              -webkit-background-clip: text !important
-              -webkit-text-fill-color: transparent
               font-style: normal
               font-weight: 300

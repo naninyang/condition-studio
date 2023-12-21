@@ -47,13 +47,13 @@ export interface WeatherData {
   };
 }
 
-export interface GradientColors {
+interface VariationColors {
   day: string;
   night: string;
 }
 
-export interface GradientMap {
-  [code: number]: GradientColors;
+export interface VariationMap {
+  [code: number]: VariationColors;
 }
 
 export interface ConditionsMap {

@@ -1,6 +1,6 @@
 import { VariationMap } from '@/types';
 
-const gradients: VariationMap = {
+const colors: VariationMap = {
   1000: { day: '#FF4E50,#F9D423', night: '#000080,#301934' },
   1003: { day: '#FF4E50,#F9D423', night: '#000080,#301934' },
   1006: { day: '#808080,#ADD8E6', night: '#808080,#ADD8E6' },
@@ -51,4 +51,4 @@ const gradients: VariationMap = {
   1282: { day: '#404040,#663399', night: '#0A0A32,#4B0082' },
 };
 
-export default gradients;
+export default colors;
