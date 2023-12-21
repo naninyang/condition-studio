@@ -59,3 +59,9 @@ export interface VariationMap {
 export interface ConditionsMap {
   [key: string]: string;
 }
+
+export type StyleProps = {
+  gradientItems?: string;
+  colorItems?: string;
+  getStatus?: string;
+};

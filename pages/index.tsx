@@ -1,10 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { AddressData, GeocodeResponse, WeatherData } from '@/types';
+import styled from '@emotion/styled';
+import { AddressData, GeocodeResponse, StyleProps, WeatherData } from '@/types';
 import gradients from '@/components/Gradiants';
 import styles from '@/styles/Home.module.sass';
 import conditions from '@/components/Conditions';
 import { getPm10Status, getPm25Status } from '@/components/Polutions';
 import colors from '@/components/Colors';
+
+const Background = styled.div<StyleProps>(({ gradientItems }) => ({
+  background: `radial-gradient(farthest-side at 100% 100%,${gradientItems})`,
+}));
+
+const Icon = styled.i<StyleProps>(({ colorItems }) => ({
+  color: `${colorItems}`,
+}));
+
+const AirIcon = styled.i<StyleProps>(({ getStatus }) => ({
+  backgroundImage: `url(${getStatus})`,
+}));
+
+const Unit = styled.em<StyleProps>(({ colorItems }) => ({
+  color: `${colorItems}`,
+}));
 
 export default function Home() {
   const [seoulDate, setSeoulDate] = useState<string>('');
@@ -74,10 +91,14 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <div
-        className={styles.background}
-        style={{ background: `radial-gradient(farthest-side at 100% 100%,${gradientItems})` }}
-      />
+      {gradientItems ? (
+        <Background className={styles.background} gradientItems={gradientItems} />
+      ) : (
+        <p className={styles.loading}>
+          <span>로딩 중</span>
+          <i />
+        </p>
+      )}
       {addressData && (
         <section>
           <header>
@@ -94,14 +115,14 @@ export default function Home() {
                 <dt>날씨 컨디션</dt>
                 <dd>
                   <div>
-                    {iconCode && (
-                      <i className="icon" style={{ color: `${colorItems}` }} aria-hidden>
+                    {iconCode && colorItems && (
+                      <Icon className="icon" colorItems={colorItems} aria-hidden>
                         {getIcon(weatherData.current.is_day, parseInt(iconCode))}
-                      </i>
+                      </Icon>
                     )}
                     <span>
                       <strong>{weatherData.current.condition.text}</strong>
-                      <em style={{ color: `${colorItems})` }}>{weatherData.current.temp_c} °C</em>
+                      {colorItems && <Unit colorItems={colorItems}>{weatherData.current.temp_c} °C</Unit>}
                     </span>
                   </div>
                 </dd>
@@ -110,33 +131,25 @@ export default function Home() {
                 <dt>(초)미세먼지</dt>
                 <dd>
                   <div>
-                    <i
-                      style={{ backgroundImage: `url(${getPm10Status(weatherData.current.air_quality.pm10).icon})` }}
-                    />
+                    <AirIcon getStatus={getPm10Status(weatherData.current.air_quality.pm10).icon} />
                     <span>
                       <strong>미세먼지 {getPm10Status(weatherData.current.air_quality.pm10).text}</strong>
-                      <em
-                        style={{
-                          color: getPm10Status(weatherData.current.air_quality.pm10).color,
-                        }}
-                      >
-                        {weatherData.current.air_quality.pm10} ㎍/㎥
-                      </em>
+                      {colorItems && (
+                        <Unit colorItems={getPm10Status(weatherData.current.air_quality.pm10).color}>
+                          {weatherData.current.air_quality.pm10} ㎍/㎥
+                        </Unit>
+                      )}
                     </span>
                   </div>
                   <div>
-                    <i
-                      style={{ backgroundImage: `url(${getPm10Status(weatherData.current.air_quality.pm2_5).icon})` }}
-                    />
+                    <AirIcon getStatus={getPm25Status(weatherData.current.air_quality.pm2_5).icon} />
                     <span>
                       <strong>초미세먼지 {getPm25Status(weatherData.current.air_quality.pm2_5).text}</strong>
-                      <em
-                        style={{
-                          color: getPm25Status(weatherData.current.air_quality.pm2_5).color,
-                        }}
-                      >
-                        {weatherData.current.air_quality.pm2_5} ㎍/㎥
-                      </em>
+                      {colorItems && (
+                        <Unit colorItems={getPm25Status(weatherData.current.air_quality.pm2_5).color}>
+                          {weatherData.current.air_quality.pm2_5} ㎍/㎥
+                        </Unit>
+                      )}
                     </span>
                   </div>
                 </dd>
