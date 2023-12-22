@@ -33,6 +33,7 @@ export default function Header() {
 
   return (
     <header>
+      <h1>컨디션 스튜디오</h1>
       <p>
         <span>
           {seoulDate} {seoulTime}

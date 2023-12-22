@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import { StyleProps } from '@/types';
 import { addressState, weatherState } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
-import gradients from '@/components/Gradiants';
 import conditions from '@/components/Conditions';
 import { getPm10Status, getPm25Status } from '@/components/Polutions';
 import colors from '@/components/Colors';

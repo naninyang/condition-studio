@@ -16,7 +16,7 @@ const useFetchData = (initialAddress: string) => {
           const { y: latitude, x: longitude } = geocodeData.result.resultdata[0];
           setAddressData({ ...geocodeData.result.resultdata[0] });
 
-          const weatherResponse = await fetch(`/api/weather?q=${latitude},${longitude}`);
+          const weatherResponse = await fetch(`/api/weather?q=${latitude},${longitude}&days=14`);
           const weatherData = await weatherResponse.json();
           setWeatherData(weatherData);
         }

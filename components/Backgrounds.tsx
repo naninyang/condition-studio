@@ -3,7 +3,7 @@ import { StyleProps } from '@/types';
 import gradients from '@/components/Gradiants';
 import conditions from '@/components/Conditions';
 import { useRecoilValue } from 'recoil';
-import { addressState, weatherState } from '@/state/atoms';
+import { weatherState } from '@/state/atoms';
 
 const Background = styled.div<StyleProps>(({ gradientItems }) => ({
   background: `radial-gradient(farthest-side at 100% 100%,${gradientItems})`,
@@ -22,7 +22,6 @@ const Unit = styled.em<StyleProps>(({ colorItems }) => ({
 }));
 
 export default function Backgrounds() {
-  const addressData = useRecoilValue(addressState);
   const weatherData = useRecoilValue(weatherState);
 
   const originalIconUrl = weatherData?.current.condition.icon;

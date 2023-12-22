@@ -12,6 +12,9 @@
       align-items: center
       padding: rem(25)
 
+      h1
+        +screen-reader-only
+
       p
         display: flex
         flex-direction: column
@@ -19,6 +22,7 @@
         font-weight: 900
         line-height: 1.42857143
 
+  .summary
     dl
       display: flex
       flex-direction: column
@@ -64,3 +68,176 @@
             em
               font-style: normal
               font-weight: 300
+
+  .forecast
+    .contain
+      display: flex
+      flex-direction: column
+      gap: rem(25)
+
+      h2
+        padding: 0 rem(25)
+        font-size: rem(16)
+        font-weight: 900
+        line-height: 1
+        color: $hex-black
+
+      .hour
+        display: flex
+        flex-direction: column
+        gap: rem(17)
+        background-color: $hex-white
+        position: relative
+        margin: 0 auto
+        border-radius: rem(12)
+        padding: rem(17) 0
+        width: calc(100% - rem(50))
+
+        &::before, &::after
+          content: ''
+          position: absolute
+          top: rem(17)
+          bottom: rem(17)
+          z-index: 1
+          width: rem(25)
+
+        &::before
+          left: 0
+          background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 75%, rgba(255,255,255,0) 100%)
+
+        &::after
+          right: 0
+          background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 100%)
+
+        .hour-list
+          overflow: auto
+          margin: 0 auto
+          width: calc(100vw - 50px)
+
+        dl
+          display: flex
+          gap: rem(12)
+          padding: 0 rem(25)
+
+          > div
+            display: flex
+            flex-direction: column
+            gap: rem(7)
+            +coln
+            width: rem(95)
+
+            &:first-of-type dt
+              font-weight: 700
+
+              &::before
+                content: '현재'
+
+              span
+                +screen-reader-only
+
+          i, em
+            font-style: normal
+
+          dt, dd
+            color: $hex-item
+            text-align: center
+
+          dt
+            font-size: rem(16)
+            line-height: 1
+            color: $hex-black
+
+          dd
+            display: flex
+            flex-direction: column
+            gap: rem(7)
+
+            div
+              display: flex
+              flex-direction: column
+              gap: rem(5)
+              border-top: 1px solid $hex-border
+              padding-top: rem(7)
+
+              span
+                display: flex
+                flex-direction: column
+                gap: rem(5)
+                font-size: rem(16)
+                letter-spacing: -.07em
+                line-height: 1
+
+            ul
+              display: flex
+              flex-direction: column
+              gap: rem(5)
+
+              li
+                font-size: rem(14)
+                letter-spacing: -.07em
+                line-height: 1
+
+      .day
+        display: flex
+        flex-direction: column
+        gap: rem(17)
+        background-color: $hex-white
+        position: relative
+        margin: 0 auto
+        border-radius: rem(12)
+        padding: rem(17) 0
+        width: calc(100% - rem(50))
+
+        dl
+          display: flex
+          flex-direction: column
+          gap: rem(17)
+          padding: 0 rem(25)
+
+          dt, dd
+            font-size: rem(16)
+            color: $hex-item
+
+          > div
+            display: flex
+
+            &:first-of-type dt
+              font-weight: 700
+
+              &::before
+                content: '오늘'
+
+              span
+                +screen-reader-only
+
+            dt
+              width: rem(45)
+              line-height: 1
+
+            dd
+              +col
+
+              i, em
+                font-style: normal
+
+              div
+                display: flex
+                align-items: center
+                gap: rem(12)
+
+              span
+                width: rem(60)
+                text-align: right
+
+              .progress
+                +col
+                background-color: #eee
+                position: relative
+                border-radius: rem(5)
+                height: rem(5)
+
+                .bar
+                  background-color: blue
+                  position: absolute
+                  border-radius: rem(5)
+                  height: 100%

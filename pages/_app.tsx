@@ -2,7 +2,6 @@ import { AppProps } from 'next/app';
 import { Noto_Sans_KR } from 'next/font/google';
 import localFont from 'next/font/local';
 import { RecoilRoot } from 'recoil';
-import { addressState, weatherState } from '@/state/atoms';
 import '@/styles/globals.sass';
 import Backgrounds from '@/components/Backgrounds';
 

@@ -56,6 +56,11 @@ export interface WeatherData {
         daily_chance_of_rain: number;
         daily_will_it_snow: number;
         daily_chance_of_snow: number;
+        condition: {
+          text: string;
+          icon: string;
+          code: number;
+        };
       };
       astro: {
         sunrise: string;
@@ -80,6 +85,11 @@ export interface WeatherData {
         daily_will_it_snow: number;
         daily_chance_of_snow: number;
         vis_km: number;
+        condition: {
+          text: string;
+          icon: string;
+          code: number;
+        };
       }>;
     }>;
   };
@@ -96,6 +106,17 @@ export interface VariationMap {
 
 export interface ConditionsMap {
   [key: string]: string;
+}
+
+export interface WeatherProgressBarProps {
+  minTemp: number;
+  maxTemp: number;
+  colorItems: string;
+}
+
+export interface WeatherState {
+  data: WeatherData | undefined;
+  isDataLoaded: boolean;
 }
 
 export type StyleProps = {
