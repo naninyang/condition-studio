@@ -54,6 +54,10 @@ export default function Forecast() {
     }).format(date);
   }
 
+  const getCurrentTime = () => {
+    return new Date();
+  };
+
   const WeatherProgressBar: React.FC<WeatherProgressBarProps> = ({ minTemp, maxTemp, colorItems }) => {
     const totalMinTemp = Math.min(...weatherData.forecast.forecastday.map((day) => day.day.mintemp_c));
     const totalMaxTemp = Math.max(...weatherData.forecast.forecastday.map((day) => day.day.maxtemp_c));
@@ -86,38 +90,40 @@ export default function Forecast() {
                 <h2>시간대별 날씨예보</h2>
                 <div className={styles['hour-list']}>
                   <dl>
-                    {weatherData.forecast.forecastday.map((item, index) => (
-                      <React.Fragment key={`item${index}`}>
-                        {item.hour.map((hourItem, index) => (
-                          <div key={index}>
-                            <dt>
-                              <span>{formatTime(hourItem.time)}</span>
-                            </dt>
-                            <dd>
-                              <div className={styles.temp}>
-                                {iconCode && colorItems && (
-                                  <Icon className="icon" colorItems={colorItems} aria-hidden>
-                                    {getIcon(hourItem.is_day, parseInt(iconCode))}
-                                  </Icon>
-                                )}
-                                <span>
-                                  <strong>{hourItem.condition.text}</strong>
-                                  {colorItems && <Unit colorItems={colorItems}>{hourItem.temp_c} °C</Unit>}
-                                </span>
-                              </div>
-                              <div className={styles.misc}>
-                                <ul>
-                                  <li aria-label="체감온도">{hourItem.feelslike_c} °C</li>
-                                  <li aria-label="풍향 및 풍속">
-                                    {hourItem.wind_dir} {hourItem.wind_kph} m/s
-                                  </li>
-                                  <li aria-label="습도">{hourItem.humidity} %</li>
-                                  {hourItem.precip_mm !== 0 && <li aria-label="강수량">{hourItem.precip_mm} mm</li>}
-                                </ul>
-                              </div>
-                            </dd>
-                          </div>
-                        ))}
+                    {weatherData.forecast.forecastday.map((dayItem, dayIndex) => (
+                      <React.Fragment key={`day${dayIndex}`}>
+                        {dayItem.hour
+                          .filter((hourItem) => new Date(hourItem.time) >= getCurrentTime())
+                          .map((hourItem, hourIndex) => (
+                            <div key={hourIndex}>
+                              <dt>
+                                <span>{formatTime(hourItem.time)}</span>
+                              </dt>
+                              <dd>
+                                <div className={styles.temp}>
+                                  {iconCode && colorItems && (
+                                    <Icon className="icon" colorItems={colorItems} aria-hidden>
+                                      {getIcon(hourItem.is_day, parseInt(iconCode))}
+                                    </Icon>
+                                  )}
+                                  <span>
+                                    <strong>{hourItem.condition.text}</strong>
+                                    {colorItems && <Unit colorItems={colorItems}>{hourItem.temp_c} °C</Unit>}
+                                  </span>
+                                </div>
+                                <div className={styles.misc}>
+                                  <ul>
+                                    <li aria-label="체감온도">{hourItem.feelslike_c} °C</li>
+                                    <li aria-label="풍향 및 풍속">
+                                      {hourItem.wind_dir} {hourItem.wind_kph} m/s
+                                    </li>
+                                    <li aria-label="습도">{hourItem.humidity} %</li>
+                                    {hourItem.precip_mm !== 0 && <li aria-label="강수량">{hourItem.precip_mm} mm</li>}
+                                  </ul>
+                                </div>
+                              </dd>
+                            </div>
+                          ))}
                       </React.Fragment>
                     ))}
                   </dl>
