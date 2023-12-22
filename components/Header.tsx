@@ -1,0 +1,44 @@
+import React, { useState, useEffect } from 'react';
+import useFetchData from '@/hooks/useFetchData';
+import { useRecoilValue } from 'recoil';
+import { addressState, weatherState } from '@/state/atoms';
+
+export default function Header() {
+  const [seoulDate, setSeoulDate] = useState<string>('');
+  const [seoulTime, setSeoulTime] = useState<string>('');
+
+  useFetchData('서울 중구 을지로 12');
+
+  useEffect(() => {
+    const now = new Date();
+    const seoulDateFormatted = new Intl.DateTimeFormat('ko-KR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'short',
+      timeZone: 'Asia/Seoul',
+    }).format(now);
+    const seoulTimeFormatted = new Intl.DateTimeFormat('ko-KR', {
+      hour: 'numeric',
+      minute: 'numeric',
+      timeZone: 'Asia/Seoul',
+    }).format(now);
+
+    setSeoulDate(seoulDateFormatted);
+    setSeoulTime(seoulTimeFormatted);
+  }, []);
+
+  const addressData = useRecoilValue(addressState);
+  const weatherData = useRecoilValue(weatherState);
+
+  return (
+    <header>
+      <p>
+        <span>
+          {seoulDate} {seoulTime}
+        </span>{' '}
+        {addressData.sido_nm} {addressData.sgg_nm} {addressData.adm_nm}
+      </p>
+    </header>
+  );
+}
