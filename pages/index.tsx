@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { AddressData, GeocodeResponse, StyleProps, WeatherData } from '@/types';
+import { StyleProps } from '@/types';
+import useFetchData from '@/hooks/useFetchData';
 import gradients from '@/components/Gradiants';
-import styles from '@/styles/Home.module.sass';
 import conditions from '@/components/Conditions';
 import { getPm10Status, getPm25Status } from '@/components/Polutions';
 import colors from '@/components/Colors';
+import styles from '@/styles/Home.module.sass';
+import { useRecoilValue } from 'recoil';
+import { addressState, weatherState } from '@/state/atoms';
 
 const Background = styled.div<StyleProps>(({ gradientItems }) => ({
   background: `radial-gradient(farthest-side at 100% 100%,${gradientItems})`,
@@ -26,10 +29,8 @@ const Unit = styled.em<StyleProps>(({ colorItems }) => ({
 export default function Home() {
   const [seoulDate, setSeoulDate] = useState<string>('');
   const [seoulTime, setSeoulTime] = useState<string>('');
-  const [addressData, setAddressData] = useState<AddressData | null>(null);
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
-  const initialAddress = '서울 중구 을지로 12';
+  useFetchData('서울 중구 을지로 12');
 
   useEffect(() => {
     const now = new Date();
@@ -50,26 +51,8 @@ export default function Home() {
     setSeoulTime(seoulTimeFormatted);
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const geocodeResponse = await fetch(`/api/geocode?address=${initialAddress}`);
-        const geocodeData: GeocodeResponse = await geocodeResponse.json();
-        if (geocodeData.result.resultdata.length > 0) {
-          const { y: latitude, x: longitude } = geocodeData.result.resultdata[0];
-          setAddressData({ ...geocodeData.result.resultdata[0] });
-
-          const weatherResponse = await fetch(`/api/weather?q=${latitude},${longitude}`);
-          const weatherData = await weatherResponse.json();
-          setWeatherData(weatherData);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    fetchData();
-  }, []);
+  const addressData = useRecoilValue(addressState);
+  const weatherData = useRecoilValue(weatherState);
 
   const originalIconUrl = weatherData?.current.condition.icon;
   const iconCode = originalIconUrl ? originalIconUrl.split('/').pop()?.split('.')[0] : undefined;
@@ -92,14 +75,6 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {gradientItems ? (
-        <Background className={styles.background} gradientItems={gradientItems} />
-      ) : (
-        <p className={styles.loading}>
-          <span>로딩 중</span>
-          <i />
-        </p>
-      )}
       {addressData && (
         <section>
           <header>
@@ -273,13 +248,6 @@ export default function Home() {
                   </div>
                 </dd>
               </div>
-              {iconCode && (
-                <div className={styles['background-condition']}>
-                  <i className="icon" aria-hidden>
-                    {getIcon(weatherData.current.is_day, parseInt(iconCode))}
-                  </i>
-                </div>
-              )}
             </dl>
           )}
         </section>

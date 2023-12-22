@@ -85,3 +85,78 @@ address, cite
 
 iframe
   display: block
+
+.background
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+  &-condition
+    position: fixed
+    bottom: 0
+    right: 0
+    width: rem(270)
+    height: rem(270)
+    overflow: hidden
+
+    i
+      position: absolute
+      width: 100%
+      height: 100%
+      font-size: rem(370)
+      font-style: normal
+      color: $hex-white
+
+.loading
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  background-color: $hex-background
+
+  span
+    +screen-reader-only
+
+  i
+    display: block
+    width: rem(50)
+    height: rem(50)
+    border: rem(5) solid transparent
+    border-radius: 50%
+    animation: spin 4s cubic-bezier(.4,0,.2,1) infinite
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+    border-right-color: $hex-white
+    border-bottom-color: $hex-white
+
+  25%
+    transform: rotate(360deg)
+    border: rem(5) solid transparent
+    border-bottom-color: $hex-white
+    border-left-color: $hex-white
+
+  50%
+    transform: rotate(720deg)
+    border: rem(5) solid transparent
+    border-top-color: $hex-white
+    border-left-color: $hex-white
+
+  75%
+    transform: rotate(1080deg)
+    border: rem(5) solid transparent
+    border-top-color: $hex-white
+    border-right-color: $hex-white
+
+  100%
+    transform: rotate(1440deg)
+    border: rem(5) solid transparent
+    border-right-color: $hex-white
+    border-bottom-color: $hex-white

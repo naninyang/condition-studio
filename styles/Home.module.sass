@@ -1,32 +1,10 @@
 @import './designSystem'
 
 .main
-  .background
-    position: fixed
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-
   section
     overflow: hidden
     position: relative
     min-height: 100dvh
-
-    .background-condition
-      position: absolute
-      bottom: rem(-100)
-      right: rem(-100)
-      width: rem(370)
-      height: rem(370)
-
-      i
-        position: absolute
-        top: 0
-        left: 0
-        font-size: rem(370)
-        font-style: normal
-        color: $hex-white
 
     header
       display: flex
@@ -86,55 +64,3 @@
             em
               font-style: normal
               font-weight: 300
-
-.loading
-  position: fixed
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  display: flex
-  justify-content: center
-  align-items: center
-  background-color: $hex-background
-
-  span
-    +screen-reader-only
-
-  i
-    display: block
-    width: rem(50)
-    height: rem(50)
-    border: rem(5) solid transparent
-    border-radius: 50%
-    animation: spin 4s cubic-bezier(.4,0,.2,1) infinite
-
-@keyframes spin
-  0%
-    transform: rotate(0deg)
-    border-right-color: $hex-white
-    border-bottom-color: $hex-white
-
-  25%
-    transform: rotate(360deg)
-    border: rem(5) solid transparent
-    border-bottom-color: $hex-white
-    border-left-color: $hex-white
-
-  50%
-    transform: rotate(720deg)
-    border: rem(5) solid transparent
-    border-top-color: $hex-white
-    border-left-color: $hex-white
-
-  75%
-    transform: rotate(1080deg)
-    border: rem(5) solid transparent
-    border-top-color: $hex-white
-    border-right-color: $hex-white
-
-  100%
-    transform: rotate(1440deg)
-    border: rem(5) solid transparent
-    border-right-color: $hex-white
-    border-bottom-color: $hex-white

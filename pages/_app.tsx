@@ -1,7 +1,10 @@
 import { AppProps } from 'next/app';
 import { Noto_Sans_KR } from 'next/font/google';
 import localFont from 'next/font/local';
+import { RecoilRoot } from 'recoil';
+import { addressState, weatherState } from '@/state/atoms';
 import '@/styles/globals.sass';
+import Backgrounds from '@/components/Backgrounds';
 
 const fontNoto = Noto_Sans_KR({
   weight: ['100', '300', '400', '700', '900'],
@@ -12,7 +15,7 @@ const weatherIcons = localFont({ src: '../fonts/dripicons-weather.woff' });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <RecoilRoot>
       <style jsx global>
         {`
           body,
@@ -37,7 +40,8 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         `}
       </style>
+      <Backgrounds />
       <Component {...pageProps} />
-    </>
+    </RecoilRoot>
   );
 }
