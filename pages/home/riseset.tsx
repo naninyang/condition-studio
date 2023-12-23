@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from '@emotion/styled';
-import { RisesetProgressBarProps, StyleProps } from '@/types';
+import { SunrisesetProgressBarProps, StyleProps } from '@/types';
 import { addressState, weatherState } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
 import colors from '@/components/Colors';
@@ -66,14 +66,14 @@ export default function Riseset() {
     setSunTimeVisible(isBetween);
   }, [weatherData]);
 
-  const SunrisesetProgressBar: React.FC<RisesetProgressBarProps> = ({ riseTime, setTime }) => {
+  const SunrisesetProgressBar: React.FC<SunrisesetProgressBarProps> = ({ sunriseTime, sunsetTime }) => {
     const todayDateString = new Date().toDateString();
-    const riseString = new Date(`${todayDateString} ${riseTime}`);
-    const setString = new Date(`${todayDateString} ${setTime}`);
+    const sunriseString = new Date(`${todayDateString} ${sunriseTime}`);
+    const sunsetString = new Date(`${todayDateString} ${sunsetTime}`);
     const now = new Date();
 
-    const totalDuration = setString.getTime() - riseString.getTime();
-    const currentTimePosition = now.getTime() - riseString.getTime();
+    const totalDuration = sunsetString.getTime() - sunriseString.getTime();
+    const currentTimePosition = now.getTime() - sunriseString.getTime();
 
     const ratio = Math.min(Math.max(currentTimePosition / totalDuration, 0), 1);
 
@@ -115,9 +115,8 @@ export default function Riseset() {
                       <dd>
                         {sunTimeVisible ? (
                           <SunrisesetProgressBar
-                            riseTime={weatherData.forecast.forecastday[0].astro.sunrise}
-                            setTime={weatherData.forecast.forecastday[0].astro.sunset}
-                            colorItems={'#FF4E50'}
+                            sunriseTime={weatherData.forecast.forecastday[0].astro.sunrise}
+                            sunsetTime={weatherData.forecast.forecastday[0].astro.sunset}
                           />
                         ) : (
                           <div className={styles.progress}>

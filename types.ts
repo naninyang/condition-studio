@@ -115,10 +115,9 @@ export interface WeatherProgressBarProps {
   colorItems: string;
 }
 
-export interface RisesetProgressBarProps {
-  rise: string;
-  set: string;
-  colorItems: string;
+export interface SunrisesetProgressBarProps {
+  sunriseTime: string;
+  sunsetTime: string;
 }
 
 export interface WeatherState {
