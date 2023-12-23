@@ -173,7 +173,9 @@ export default function Summary() {
                   <div>
                     <AirIcon getStatus={getPm10Status(weatherData.current.air_quality.pm10).icon} />
                     <span>
-                      <strong>미세먼지 {getPm10Status(weatherData.current.air_quality.pm10).text}</strong>
+                      <strong>
+                        미세먼지 <em>{getPm10Status(weatherData.current.air_quality.pm10).text}</em>
+                      </strong>
                       {colorItems && (
                         <Unit colorItems={getPm10Status(weatherData.current.air_quality.pm10).color}>
                           {weatherData.current.air_quality.pm10} ㎍/㎥
@@ -184,7 +186,9 @@ export default function Summary() {
                   <div>
                     <AirIcon getStatus={getPm25Status(weatherData.current.air_quality.pm2_5).icon} />
                     <span>
-                      <strong>초미세먼지 {getPm25Status(weatherData.current.air_quality.pm2_5).text}</strong>
+                      <strong>
+                        초미세먼지 <em>{getPm25Status(weatherData.current.air_quality.pm2_5).text}</em>
+                      </strong>
                       {colorItems && (
                         <Unit colorItems={getPm25Status(weatherData.current.air_quality.pm2_5).color}>
                           {weatherData.current.air_quality.pm2_5} ㎍/㎥
