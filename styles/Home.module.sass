@@ -4,7 +4,6 @@
   section
     overflow: hidden
     position: relative
-    min-height: 100dvh
 
     header
       display: flex
@@ -22,7 +21,98 @@
         font-weight: 900
         line-height: 1.42857143
 
+    footer
+      display: flex
+      justify-content: center
+      align-items: center
+      margin-top: rem(75)
+      padding: rem(50) rem(25)
+      background-color: rgba($hex-black, .7)
+      backdrop-filter: blur(rem(70))
+
+      .footer
+        display: flex
+        flex-direction: column
+        gap: rem(7)
+        width: 100%
+
+        p
+          color: $hex-white
+          font-size: rem(14)
+
+          +mq(maxExtraSmall)
+            display: flex
+            flex-direction: column
+            gap: rem(2)
+
+        ul
+          display: flex
+          gap: rem(12),
+
+          +mq(maxExtraSmall)
+            justify-content: flex-end
+            padding-top: rem(50)
+
+        a
+          transition: all .4s cubic-bezier(.4,0,.2,1)
+          position: relative
+          display: block
+          border-bottom-width: 1px
+          border-bottom-style: solid
+          padding: rem(2)
+          font-size: rem(14)
+          color: $hex-light
+
+          &:hover, &:focus
+            color: $hex-white
+            font-weight: 700
+
+            &::after
+              content: ''
+              position: absolute
+              bottom: 0
+              left: 0
+              border-radius: rem(2)
+              width: 100%
+              height: rem(2)
+              background-color: $hex-white
+
+        dl
+          display: flex
+          gap: rem(2)
+          padding-top: rem(27)
+          +mq(maxExtraSmall)
+            flex-direction: column
+
+          div
+            display: flex
+            gap: rem(7)
+            font-size: rem(14)
+            color: $hex-light
+
+            +mq(maxExtraSmall)
+              justify-content: flex-end
+
+            +mq(minSmall)
+              &::before
+                content: '|'
+                padding-left: rem(7)
+                padding-right: rem(2)
+                font-size: rem(10)
+
+              &:first-of-type::before
+                display: none
+
+          dt
+            font-weight: 700
+            text-transform: uppercase
+
+          dt, dd
+            font-size: rem(12)
+
   .summary
+    min-height: 100dvh
+
     dl
       display: flex
       flex-direction: column

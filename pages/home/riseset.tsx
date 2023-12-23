@@ -5,9 +5,9 @@ import { SunrisesetProgressBarProps, StyleProps } from '@/types';
 import { addressState, weatherState } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
 import colors from '@/components/Colors';
-import Header from '@/components/Header';
 import styles from '@/styles/Home.module.sass';
 import MoonName from '@/components/Moon';
+import Footer from '@/components/Footer';
 
 const Icon = styled.i<StyleProps>(({ colorItems }) => ({
   color: `${colorItems}`,
@@ -97,7 +97,6 @@ export default function Riseset() {
     <>
       {addressData && (
         <section className={styles.riseset}>
-          <Header />
           {weatherData && weatherData.forecast.forecastday[0] && (
             <div className={styles.contain}>
               <div className={`${styles.sun} ${styles.module}`}>
@@ -180,6 +179,7 @@ export default function Riseset() {
               </div>
             </div>
           )}
+          <Footer />
         </section>
       )}
     </>

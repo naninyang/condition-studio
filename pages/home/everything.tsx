@@ -6,7 +6,6 @@ import { addressState, weatherState } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
 import colors from '@/components/Colors';
 import WindDirection from '@/components/Wind';
-import Header from '@/components/Header';
 import styles from '@/styles/Home.module.sass';
 
 const Icon = styled.i<StyleProps>(({ colorItems }) => ({
@@ -32,7 +31,6 @@ export default function Everything() {
     <>
       {addressData && (
         <section className={styles.everything}>
-          <Header />
           {weatherData && (
             <div className={styles.contain}>
               <div className={`${styles.primary} ${styles.module}`}>
