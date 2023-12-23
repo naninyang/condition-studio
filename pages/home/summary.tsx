@@ -108,10 +108,10 @@ export default function Summary() {
                         .
                       </i>
                       <span>
-                        <strong>적설량 (눈 내릴 확률)</strong>
+                        <strong>적설량</strong>
                         <em>
-                          {weatherData.forecast.forecastday[0].day.totalsnow_cm} cm (
-                          {weatherData.forecast.forecastday[0].day.daily_chance_of_snow} %)
+                          {weatherData.forecast.forecastday[0].day.totalsnow_cm} cm /{' '}
+                          {weatherData.forecast.forecastday[0].day.daily_chance_of_snow} %
                         </em>
                       </span>
                     </div>
