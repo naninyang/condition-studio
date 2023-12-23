@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useFetchData from '@/hooks/useFetchData';
 import { useRecoilValue } from 'recoil';
-import { addressState, weatherState } from '@/state/atoms';
+import { addressState } from '@/state/atoms';
 
 export default function Header() {
   const [seoulDate, setSeoulDate] = useState<string>('');
@@ -29,7 +29,6 @@ export default function Header() {
   }, []);
 
   const addressData = useRecoilValue(addressState);
-  const weatherData = useRecoilValue(weatherState);
 
   return (
     <header>

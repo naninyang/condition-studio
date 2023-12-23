@@ -331,3 +331,102 @@
 
             dt
               color: $hex-black
+
+  .riseset
+    .contain
+      .sun
+        .list
+          dl
+            display: flex
+            gap: rem(7)
+            padding: 0 rem(25) rem(25)
+
+            div
+              display: flex
+              flex-direction: column-reverse
+              gap: rem(5)
+
+              &:first-of-type
+                text-align: right
+
+              &.now
+                +col
+
+                dt
+                  +screen-reader-only
+
+                dd
+                  display: flex
+                  flex-direction: column
+                  gap: rem(5)
+
+              dt, dd
+                line-height: 1
+
+              dt
+                font-size: rem(12)
+                color: $hex-item
+
+              dd
+                font-size: rem(14)
+                font-weight: 700
+                color: $hex-black
+
+                .progress
+                  background-color: $hex-light
+                  border-radius: rem(12)
+                  width: 100%
+                  height: rem(12)
+
+                  > span
+                    +screen-reader-only
+
+                  .bar
+                    position: relative
+                    border-radius: rem(12)
+                    height: rem(12)
+
+                    i
+                      background-color: $hex-dark
+                      position: absolute
+                      top: 0
+                      right: 0
+                      border-radius: rem(12)
+                      width: rem(12)
+                      height: rem(12)
+
+                    span
+                      position: absolute
+                      top: rem(15)
+                      right: rem(-20)
+                      font-size: rem(12)
+
+      .moon
+        .list
+          display: flex
+          gap: rem(12)
+          padding: 0 rem(25)
+
+          i
+            font-size: rem(32)
+            font-style: normal
+
+          dl
+            display: flex
+            +col
+            gap: rem(5)
+
+            div
+              display: flex
+              flex-direction: column
+              gap: rem(7)
+              +coln
+              width: rem(80)
+
+            dt, dd
+              font-size: rem(14)
+              line-height: 1
+              letter-spacing: -.07em
+
+            dt
+              color: $hex-black

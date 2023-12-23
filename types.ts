@@ -115,6 +115,12 @@ export interface WeatherProgressBarProps {
   colorItems: string;
 }
 
+export interface RisesetProgressBarProps {
+  rise: string;
+  set: string;
+  colorItems: string;
+}
+
 export interface WeatherState {
   data: WeatherData | undefined;
   isDataLoaded: boolean;

@@ -1,10 +1,10 @@
 export const hex: { [key: string]: string } = {
   black: '#000',
   white: '#fff',
-  light: '#3C3C434D',
+  light: '#C4C6C9',
   background: '#0D0D0D',
   item: '#1C1C1E',
-  dark: '#545458',
+  dark: '#8A8E94',
 };
 
 export const mq = {

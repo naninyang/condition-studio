@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import { StyleProps } from '@/types';
 import { addressState, weatherState } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
-import conditions from '@/components/Conditions';
 import colors from '@/components/Colors';
 import WindDirection from '@/components/Wind';
 import Header from '@/components/Header';
@@ -23,44 +22,11 @@ export default function Everything() {
   const addressData = useRecoilValue(addressState);
   const weatherData = useRecoilValue(weatherState);
 
-  const originalIconUrl = weatherData?.current.condition.icon;
-  const iconCode = originalIconUrl ? originalIconUrl.split('/').pop()?.split('.')[0] : undefined;
-
   const getColors = (code: number, isDay: number): string => {
     const color = colors[code] || colors[1000];
     return isDay ? color.day : color.night;
   };
   const colorItems = weatherData && getColors(weatherData.current.condition.code, weatherData.current.is_day);
-
-  const getIcon = (isDay: number, iconCode: number): string => {
-    return conditions[`${isDay}_${iconCode}`];
-  };
-
-  function formatTime(timeString: string) {
-    const date = new Date(timeString);
-    return new Intl.DateTimeFormat('ko-KR', {
-      hour: 'numeric',
-      hour12: true,
-    }).format(date);
-  }
-
-  function formatWeekday(weekdayString: string) {
-    const date = new Date(weekdayString);
-    return new Intl.DateTimeFormat('ko-KR', {
-      weekday: 'short',
-    }).format(date);
-  }
-
-  function formatDay(dayString: string) {
-    const date = new Date(dayString);
-    return new Intl.DateTimeFormat('ko-KR', {
-      day: 'numeric',
-    }).format(date);
-  }
-
-  const getCurrentTime = () => {
-    return new Date();
-  };
 
   return (
     <>
