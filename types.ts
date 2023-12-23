@@ -27,7 +27,7 @@ export interface WeatherData {
     temp_c: number;
     feelslike_c: number;
     is_day: number;
-    wind_kph: number;
+    gust_kph: number;
     precip_mm: number;
     humidity: number;
     wind_dir: string;
@@ -74,7 +74,7 @@ export interface WeatherData {
         time: string;
         temp_c: number;
         is_day: number;
-        wind_kph: number;
+        gust_kph: number;
         wind_dir: string;
         precip_mm: number;
         humidity: number;

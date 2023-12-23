@@ -37,7 +37,7 @@
         flex-direction: column
         justify-content: center
         border-radius: 0 rem(26)rem(26) 0
-        padding: rem(12) rem(50) rem(12) rem(25)
+        padding: rem(12) rem(37) rem(12) rem(25)
         background-color: $hex-white
         color: $hex-item
 
@@ -112,14 +112,21 @@
           background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 100%)
 
         .hour-list
+          position: relative
           overflow: auto
           margin: 0 auto
-          width: calc(100vw - 50px)
+          width: 100%
+          height: rem(157)
 
         dl
+          position: absolute
+          top: 0
+          left: 0
           display: flex
+          flex-wrap: nowrap
           gap: rem(12)
           padding: 0 rem(25)
+          white-space: nowrap
 
           > div
             display: flex
@@ -158,7 +165,7 @@
               display: flex
               flex-direction: column
               gap: rem(5)
-              border-top: 1px solid $hex-border
+              border-top: 1px solid $hex-dark
               padding-top: rem(7)
 
               span
@@ -202,19 +209,40 @@
 
           > div
             display: flex
+            gap: rem(12)
 
             &:first-of-type dt
               font-weight: 700
 
-              &::before
-                content: '오늘'
-
               span
-                +screen-reader-only
+                &::after
+                  content: '오늘'
+                  font-size: rem(16)
+
+                em
+                  +screen-reader-only
 
             dt
-              width: rem(45)
+              display: flex
+              align-items: center
+              +col-auto
+              width: rem(60)
               line-height: 1
+
+              span
+                display: flex
+                justify-content: space-between
+                align-items: center
+                +col
+                font-size: rem(12)
+                color: $hex-dark
+
+                strong, em
+                  +col
+
+                em
+                  font-size: rem(16)
+                  font-style: normal
 
             dd
               +col
@@ -225,7 +253,10 @@
               div
                 display: flex
                 align-items: center
-                gap: rem(12)
+                gap: rem(7)
+
+              i + em
+                +screen-reader-only
 
               span
                 width: rem(60)
@@ -233,7 +264,7 @@
 
               .progress
                 +col
-                background-color: #eee
+                background-color: $hex-light
                 position: relative
                 border-radius: rem(5)
                 height: rem(5)

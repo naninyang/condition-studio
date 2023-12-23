@@ -13,10 +13,6 @@ const Icon = styled.i<StyleProps>(({ colorItems }) => ({
   color: `${colorItems}`,
 }));
 
-const AirIcon = styled.i<StyleProps>(({ getStatus }) => ({
-  backgroundImage: `url(${getStatus})`,
-}));
-
 const Unit = styled.em<StyleProps>(({ colorItems }) => ({
   color: `${colorItems}`,
 }));
@@ -47,10 +43,17 @@ export default function Forecast() {
     }).format(date);
   }
 
+  function formatWeekday(weekdayString: string) {
+    const date = new Date(weekdayString);
+    return new Intl.DateTimeFormat('ko-KR', {
+      weekday: 'short',
+    }).format(date);
+  }
+
   function formatDay(dayString: string) {
     const date = new Date(dayString);
     return new Intl.DateTimeFormat('ko-KR', {
-      weekday: 'short',
+      day: 'numeric',
     }).format(date);
   }
 
@@ -115,10 +118,9 @@ export default function Forecast() {
                                   <ul>
                                     <li aria-label="체감온도">{hourItem.feelslike_c} °C</li>
                                     <li aria-label="풍향 및 풍속">
-                                      {hourItem.wind_dir} {hourItem.wind_kph} m/s
+                                      {hourItem.wind_dir} {(hourItem.gust_kph / 3.6).toFixed(1)} m/s
                                     </li>
                                     <li aria-label="습도">{hourItem.humidity} %</li>
-                                    {hourItem.precip_mm !== 0 && <li aria-label="강수량">{hourItem.precip_mm} mm</li>}
                                   </ul>
                                 </div>
                               </dd>
@@ -136,22 +138,31 @@ export default function Forecast() {
                     {weatherData.forecast.forecastday.map((item, index) => (
                       <div key={index}>
                         <dt>
-                          <span>{formatDay(item.date)}</span>
+                          <span>
+                            <strong>{formatDay(item.date)}</strong> <em>{formatWeekday(item.date)}</em>
+                          </span>
                         </dt>
                         <dd>
                           <div className={styles.temp}>
                             {iconCode && colorItems && (
-                              <Icon className="icon" colorItems={colorItems} aria-hidden>
-                                {getIcon(1, parseInt(iconCode))}
-                              </Icon>
+                              <>
+                                <Icon className="icon" colorItems={colorItems} aria-hidden>
+                                  {getIcon(1, parseInt(iconCode))}
+                                </Icon>
+                                <em>{item.day.condition.text}</em>
+                              </>
                             )}
-                            <span>{colorItems && <Unit colorItems={colorItems}>{item.day.mintemp_c} °C</Unit>}</span>
+                            <span aria-label="최저기온">
+                              {colorItems && <Unit colorItems={colorItems}>{item.day.mintemp_c} °C</Unit>}
+                            </span>
                             <WeatherProgressBar
                               minTemp={item.day.mintemp_c}
                               maxTemp={item.day.maxtemp_c}
                               colorItems={colorItems}
                             />
-                            <span>{colorItems && <Unit colorItems={colorItems}>{item.day.maxtemp_c} °C</Unit>}</span>
+                            <span aria-label="최고기온">
+                              {colorItems && <Unit colorItems={colorItems}>{item.day.maxtemp_c} °C</Unit>}
+                            </span>
                           </div>
                         </dd>
                       </div>
