@@ -89,9 +89,9 @@ export default function Forecast() {
           <Header />
           {weatherData && (
             <div className={styles.contain}>
-              <div className={styles.hour}>
+              <div className={`${styles.hour} ${styles.module}`}>
                 <h2>시간대별 날씨예보</h2>
-                <div className={styles['hour-list']}>
+                <div className={styles.list}>
                   <dl>
                     {weatherData.forecast.forecastday.map((dayItem, dayIndex) => (
                       <React.Fragment key={`day${dayIndex}`}>
@@ -131,9 +131,9 @@ export default function Forecast() {
                   </dl>
                 </div>
               </div>
-              <div className={styles.day}>
+              <div className={`${styles.day} ${styles.module}`}>
                 <h2>{weatherData.forecast.forecastday.length}일간의 일기예보</h2>
-                <div className={styles['day-list']}>
+                <div className={styles.list}>
                   <dl>
                     {weatherData.forecast.forecastday.map((item, index) => (
                       <div key={index}>

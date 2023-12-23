@@ -71,29 +71,34 @@
               font-style: normal
               font-weight: 300
 
-  .forecast
-    .contain
+  .contain
+    display: flex
+    flex-direction: column
+    gap: rem(25)
+    padding-top: rem(52)
+
+    h2
+      padding: 0 rem(25)
+      font-size: rem(16)
+      font-weight: 900
+      line-height: 1
+      color: $hex-black
+
+    .module
       display: flex
       flex-direction: column
-      gap: rem(25)
+      gap: rem(17)
+      background-color: $hex-white
+      position: relative
+      margin: 0 auto
+      border-radius: rem(12)
+      padding: rem(17) 0
+      width: calc(100% - rem(50))
 
-      h2
-        padding: 0 rem(25)
-        font-size: rem(16)
-        font-weight: 900
-        line-height: 1
-        color: $hex-black
-
+  .forecast
+    .contain
       .hour
-        display: flex
-        flex-direction: column
-        gap: rem(17)
-        background-color: $hex-white
         position: relative
-        margin: 0 auto
-        border-radius: rem(12)
-        padding: rem(17) 0
-        width: calc(100% - rem(50))
 
         &::before, &::after
           content: ''
@@ -111,12 +116,12 @@
           right: 0
           background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 100%)
 
-        .hour-list
+        .list
           position: relative
           overflow: auto
           margin: 0 auto
           width: 100%
-          height: rem(157)
+          height: rem(160)
 
         dl
           position: absolute
@@ -187,16 +192,6 @@
                 line-height: 1
 
       .day
-        display: flex
-        flex-direction: column
-        gap: rem(17)
-        background-color: $hex-white
-        position: relative
-        margin: 0 auto
-        border-radius: rem(12)
-        padding: rem(17) 0
-        width: calc(100% - rem(50))
-
         dl
           display: flex
           flex-direction: column
@@ -274,3 +269,65 @@
                   position: absolute
                   border-radius: rem(5)
                   height: 100%
+
+  .everything
+    .contain
+      .primary
+        .list
+          display: flex
+          gap: rem(12)
+          padding: 0 rem(25)
+
+          i
+            font-size: rem(32)
+            font-style: normal
+
+          dl
+            display: flex
+            +col
+            gap: rem(5)
+
+            div
+              display: flex
+              flex-direction: column
+              gap: rem(7)
+              +coln
+              width: rem(55)
+
+            dt, dd
+              font-size: rem(14)
+              line-height: 1
+              letter-spacing: -.07em
+
+            dt
+              color: $hex-black
+
+      .secondary
+        .list
+          display: flex
+          gap: rem(12)
+          padding: 0 rem(25)
+
+          i
+            font-size: rem(32)
+            font-style: normal
+
+          dl
+            display: flex
+            +col
+            gap: rem(5)
+
+            div
+              display: flex
+              flex-direction: column
+              gap: rem(7)
+              +coln
+              width: rem(107)
+
+            dt, dd
+              font-size: rem(14)
+              line-height: 1
+              letter-spacing: -.07em
+
+            dt
+              color: $hex-black
