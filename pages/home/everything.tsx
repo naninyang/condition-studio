@@ -105,7 +105,7 @@ export default function Everything() {
               </div>
               <div className={`${styles.primary} ${styles.module}`}>
                 <h2>습도 정보</h2>
-                <div className={styles['primary-list']}>
+                <div className={styles.list}>
                   <Icon className="icon" colorItems={colorItems} aria-hidden>
                     -
                   </Icon>
