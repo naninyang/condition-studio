@@ -363,6 +363,7 @@
                   background-color: blue
                   position: absolute
                   border-radius: rem(5)
+                  min-width: rem(5)
                   height: 100%
 
   .everything
@@ -479,22 +480,29 @@
                   .bar
                     position: relative
                     border-radius: rem(12)
+                    min-width: rem(12)
                     height: rem(12)
 
                     i
-                      background-color: $hex-dark
+                      display: flex
+                      justify-content: center
+                      align-items: center
+                      background-color: $hex-white
                       position: absolute
-                      top: 0
+                      top: rem(-10)
                       right: 0
-                      border-radius: rem(12)
-                      width: rem(12)
-                      height: rem(12)
+                      border-radius: rem(33)
+                      width: rem(33)
+                      height: rem(33)
+                      font-size: rem(23)
+                      font-style: normal
 
                     span
                       position: absolute
-                      top: rem(15)
-                      right: rem(-20)
+                      top: rem(25)
+                      right: rem(-10)
                       font-size: rem(12)
+                      white-space: nowrap
 
       .moon
         .list

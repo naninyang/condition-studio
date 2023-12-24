@@ -86,7 +86,9 @@ export default function Riseset() {
             backgroundColor: '#FF4E50',
           }}
         >
-          <i />
+          <i className="icon" style={{ color: '#FF4E50' }} aria-hidden>
+            /
+          </i>
           <span style={{ color: '#FF4E50' }}>{seoulTime}</span>
         </div>
       </div>
