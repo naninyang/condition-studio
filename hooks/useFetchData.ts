@@ -25,7 +25,7 @@ const useFetchData = (initialAddress: string) => {
       }
     }
     fetchData();
-  }, []);
+  }, [setWeatherData, setAddressData, initialAddress]);
 };
 
 export default useFetchData;
