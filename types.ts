@@ -129,4 +129,5 @@ export type StyleProps = {
   gradientItems?: string;
   colorItems?: string;
   getStatus?: string;
+  isDay?: number;
 };
