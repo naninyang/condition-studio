@@ -137,3 +137,88 @@
       font-size: rem(16)
       font-weight: 900
       letter-spacing: -.07em
+
+  hr
+    margin: rem(20) 0
+    border: 1px solid $hex-light
+
+    +mq(minLarge)
+      margin: rem(25) 0
+
+  .documents
+    background-color: rgba(0,0,0,.7)
+    backdrop-filter: blur(rem(50))
+    margin: rem(50) auto
+    border-radius: rem(12)
+    padding: rem(25)
+    width: 100%
+    max-width: rem(720)
+
+    & :last-of-type hr
+      display: none
+
+    pre, code
+      white-space: pre-wrap
+      font-size: rem(14)
+
+  .info
+    display: flex
+    flex-direction: column
+    gap: rem(27)
+    margin-top: rem(75)
+
+    dl
+      display: flex
+      flex-direction: column
+      align-items: center
+      gap: rem(7)
+
+      div
+        display: flex
+        align-items: center
+        gap: rem(7)
+
+        dt, dd
+          line-height: 1
+
+        dt
+          width: rem(135)
+          font-size: rem(12)
+          color: $hex-light
+          text-transform: uppercase
+          text-align: right
+
+        dd
+          font-size: rem(14)
+          font-weight: 700
+
+    ul
+      display: flex
+      justify-content: center
+      gap: rem(7)
+
+      li
+        font-size: rem(12)
+
+        a
+          font-size: rem(14)
+          color: $hex-light
+          text-decoration: underline
+
+        &::before
+          content: '/'
+          padding-right: rem(7)
+
+        &:first-of-type::before
+          display: none
+
+    p
+      font-size: rem(16)
+      text-align: center
+
+      & + p
+        font-size: rem(12)
+        line-height: 1.7
+
+      span
+        display: block
