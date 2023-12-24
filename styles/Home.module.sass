@@ -26,14 +26,19 @@
       justify-content: center
       align-items: center
       margin-top: rem(75)
-      padding: rem(50) rem(25)
+      padding: rem(25) rem(25)
       backdrop-filter: blur(rem(50))
+
+      +mq(minSmall)
+        padding: rem(50) rem(25)
 
       .footer
         display: flex
         flex-direction: column
-        gap: rem(7)
         width: 100%
+
+        +mq(minSmall)
+          gap: rem(7)
 
         p
           font-size: rem(14)
@@ -46,10 +51,13 @@
         ul
           display: flex
           gap: rem(12),
+          padding-top: rem(22)
 
           +mq(maxExtraSmall)
             justify-content: flex-end
-            padding-top: rem(50)
+
+          +mq(minSmall)
+            padding-top: rem(27)
 
         a
           transition: all .4s cubic-bezier(.4,0,.2,1)
@@ -75,10 +83,13 @@
         dl
           display: flex
           gap: rem(2)
-          padding-top: rem(27)
+          padding-top: rem(12)
 
           +mq(maxExtraSmall)
             flex-direction: column
+
+          +mq(minSmall)
+            padding-top: rem(7)
 
           div
             display: flex
