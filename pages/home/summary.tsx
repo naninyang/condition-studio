@@ -59,173 +59,175 @@ export default function Summary() {
         <section className={styles.summary}>
           <Header />
           {weatherData && (
-            <dl>
-              <div>
-                <dt>날씨 컨디션</dt>
-                <dd>
-                  <div>
-                    {iconCode && colorItems && (
-                      <Icon className="icon" colorItems={colorItems} aria-hidden>
-                        {getIcon(weatherData.current.is_day, parseInt(iconCode))}
-                      </Icon>
-                    )}
-                    <span>
-                      <strong>{weatherData.current.condition.text}</strong>
-                      {colorItems && <Unit colorItems={colorItems}>{weatherData.current.temp_c} °C</Unit>}
-                    </span>
-                  </div>
-                </dd>
-              </div>
-              <div>
-                <dt>최고/최저 기온</dt>
-                <dd>
-                  <div>
-                    <i className="icon" aria-hidden>
-                      @
-                    </i>
-                    <span>
-                      <strong>기온</strong>
-                      <em>
-                        {weatherData.forecast.forecastday[0].day.maxtemp_c} °C /{' '}
-                        {weatherData.forecast.forecastday[0].day.mintemp_c} °C
-                      </em>
-                    </span>
-                  </div>
-                </dd>
-              </div>
-              {weatherData.current.precip_mm !== 0 && (
+            <div className={styles.container}>
+              <dl>
                 <div>
-                  <dt>강수량/비올확률</dt>
+                  <dt>날씨 컨디션</dt>
+                  <dd>
+                    <div>
+                      {iconCode && colorItems && (
+                        <Icon className="icon" colorItems={colorItems} aria-hidden>
+                          {getIcon(weatherData.current.is_day, parseInt(iconCode))}
+                        </Icon>
+                      )}
+                      <span>
+                        <strong>{weatherData.current.condition.text}</strong>
+                        {colorItems && <Unit colorItems={colorItems}>{weatherData.current.temp_c} °C</Unit>}
+                      </span>
+                    </div>
+                  </dd>
+                </div>
+                <div>
+                  <dt>최고/최저 기온</dt>
                   <dd>
                     <div>
                       <i className="icon" aria-hidden>
-                        `
+                        @
                       </i>
                       <span>
-                        <strong>강수량 (비올 확률)</strong>
+                        <strong>기온</strong>
                         <em>
-                          {weatherData.current.precip_mm} mm (
-                          {weatherData.forecast.forecastday[0].day.daily_chance_of_rain} %)
+                          {weatherData.forecast.forecastday[0].day.maxtemp_c} °C /{' '}
+                          {weatherData.forecast.forecastday[0].day.mintemp_c} °C
                         </em>
                       </span>
                     </div>
                   </dd>
                 </div>
-              )}
-              {weatherData.forecast.forecastday[0].day.totalsnow_cm !== 0 && (
-                <div>
-                  <dt>적설량/눈내릴확률</dt>
-                  <dd>
-                    <div>
-                      <i className="icon" aria-hidden>
-                        .
-                      </i>
-                      <span>
-                        <strong>적설량</strong>
-                        <em>
-                          {weatherData.forecast.forecastday[0].day.totalsnow_cm} cm /{' '}
-                          {weatherData.forecast.forecastday[0].day.daily_chance_of_snow} %
-                        </em>
-                      </span>
-                    </div>
-                  </dd>
-                </div>
-              )}
-              {weatherData.forecast.forecastday[0].day.daily_will_it_rain !== 0 &&
-                weatherData.forecast.forecastday[0].day.daily_will_it_snow !== 0 && (
+                {weatherData.current.precip_mm !== 0 && (
                   <div>
-                    <dt>비와 눈이 내린다</dt>
+                    <dt>강수량/비올확률</dt>
+                    <dd>
+                      <div>
+                        <i className="icon" aria-hidden>
+                          `
+                        </i>
+                        <span>
+                          <strong>강수량 (비올 확률)</strong>
+                          <em>
+                            {weatherData.current.precip_mm} mm (
+                            {weatherData.forecast.forecastday[0].day.daily_chance_of_rain} %)
+                          </em>
+                        </span>
+                      </div>
+                    </dd>
+                  </div>
+                )}
+                {weatherData.forecast.forecastday[0].day.totalsnow_cm !== 0 && (
+                  <div>
+                    <dt>적설량/눈내릴확률</dt>
+                    <dd>
+                      <div>
+                        <i className="icon" aria-hidden>
+                          .
+                        </i>
+                        <span>
+                          <strong>적설량</strong>
+                          <em>
+                            {weatherData.forecast.forecastday[0].day.totalsnow_cm} cm /{' '}
+                            {weatherData.forecast.forecastday[0].day.daily_chance_of_snow} %
+                          </em>
+                        </span>
+                      </div>
+                    </dd>
+                  </div>
+                )}
+                {weatherData.forecast.forecastday[0].day.daily_will_it_rain !== 0 &&
+                  weatherData.forecast.forecastday[0].day.daily_will_it_snow !== 0 && (
+                    <div>
+                      <dt>비와 눈이 내린다</dt>
+                      <dd>
+                        <div>
+                          <i className="icon" aria-hidden>
+                            &#123;
+                          </i>
+                          <span>
+                            <em>비도 오고 눈도 와요.</em>
+                          </span>
+                        </div>
+                      </dd>
+                    </div>
+                  )}
+                {(weatherData.forecast.forecastday[0].day.daily_will_it_rain !== 0 ||
+                  weatherData.forecast.forecastday[0].day.daily_will_it_snow !== 0) && (
+                  <div>
+                    <dt>비 또는 비가 내린다</dt>
                     <dd>
                       <div>
                         <i className="icon" aria-hidden>
                           &#123;
                         </i>
                         <span>
-                          <em>비도 오고 눈도 와요.</em>
+                          <em>
+                            {weatherData.forecast.forecastday[0].day.daily_will_it_rain !== 0 && '비가 주륵주륵'}
+                            {weatherData.forecast.forecastday[0].day.daily_will_it_snow !== 0 && '눈이 펑펑'}
+                          </em>
                         </span>
                       </div>
                     </dd>
                   </div>
                 )}
-              {(weatherData.forecast.forecastday[0].day.daily_will_it_rain !== 0 ||
-                weatherData.forecast.forecastday[0].day.daily_will_it_snow !== 0) && (
                 <div>
-                  <dt>비 또는 비가 내린다</dt>
+                  <dt>습도</dt>
                   <dd>
                     <div>
                       <i className="icon" aria-hidden>
-                        &#123;
+                        -
                       </i>
                       <span>
-                        <em>
-                          {weatherData.forecast.forecastday[0].day.daily_will_it_rain !== 0 && '비가 주륵주륵'}
-                          {weatherData.forecast.forecastday[0].day.daily_will_it_snow !== 0 && '눈이 펑펑'}
-                        </em>
+                        <strong>습도</strong>
+                        <em>{weatherData.current.humidity} %</em>
                       </span>
                     </div>
                   </dd>
                 </div>
-              )}
-              <div>
-                <dt>습도</dt>
-                <dd>
-                  <div>
-                    <i className="icon" aria-hidden>
-                      -
-                    </i>
-                    <span>
-                      <strong>습도</strong>
-                      <em>{weatherData.current.humidity} %</em>
-                    </span>
-                  </div>
-                </dd>
-              </div>
-              <div>
-                <dt>(초)미세먼지</dt>
-                <dd>
-                  <div>
-                    <AirIcon getStatus={getPm10Status(weatherData.current.air_quality.pm10).icon} />
-                    <span>
-                      <strong>
-                        미세먼지 <em>{getPm10Status(weatherData.current.air_quality.pm10).text}</em>
-                      </strong>
-                      {colorItems && (
-                        <Unit colorItems={getPm10Status(weatherData.current.air_quality.pm10).color}>
-                          {weatherData.current.air_quality.pm10} ㎍/㎥
-                        </Unit>
-                      )}
-                    </span>
-                  </div>
-                  <div>
-                    <AirIcon getStatus={getPm25Status(weatherData.current.air_quality.pm2_5).icon} />
-                    <span>
-                      <strong>
-                        초미세먼지 <em>{getPm25Status(weatherData.current.air_quality.pm2_5).text}</em>
-                      </strong>
-                      {colorItems && (
-                        <Unit colorItems={getPm25Status(weatherData.current.air_quality.pm2_5).color}>
-                          {weatherData.current.air_quality.pm2_5} ㎍/㎥
-                        </Unit>
-                      )}
-                    </span>
-                  </div>
-                </dd>
-              </div>
-              <div>
-                <dt>가시거리</dt>
-                <dd>
-                  <div>
-                    <i className="icon" aria-hidden>
-                      $
-                    </i>
-                    <span>
-                      <strong>가시거리</strong>
-                      <em>{weatherData.forecast.forecastday[0].day.avgvis_km} Km</em>
-                    </span>
-                  </div>
-                </dd>
-              </div>
-            </dl>
+                <div>
+                  <dt>(초)미세먼지</dt>
+                  <dd>
+                    <div>
+                      <AirIcon getStatus={getPm10Status(weatherData.current.air_quality.pm10).icon} />
+                      <span>
+                        <strong>
+                          미세먼지 <em>{getPm10Status(weatherData.current.air_quality.pm10).text}</em>
+                        </strong>
+                        {colorItems && (
+                          <Unit colorItems={getPm10Status(weatherData.current.air_quality.pm10).color}>
+                            {weatherData.current.air_quality.pm10} ㎍/㎥
+                          </Unit>
+                        )}
+                      </span>
+                    </div>
+                    <div>
+                      <AirIcon getStatus={getPm25Status(weatherData.current.air_quality.pm2_5).icon} />
+                      <span>
+                        <strong>
+                          초미세먼지 <em>{getPm25Status(weatherData.current.air_quality.pm2_5).text}</em>
+                        </strong>
+                        {colorItems && (
+                          <Unit colorItems={getPm25Status(weatherData.current.air_quality.pm2_5).color}>
+                            {weatherData.current.air_quality.pm2_5} ㎍/㎥
+                          </Unit>
+                        )}
+                      </span>
+                    </div>
+                  </dd>
+                </div>
+                <div>
+                  <dt>가시거리</dt>
+                  <dd>
+                    <div>
+                      <i className="icon" aria-hidden>
+                        $
+                      </i>
+                      <span>
+                        <strong>가시거리</strong>
+                        <em>{weatherData.forecast.forecastday[0].day.avgvis_km} Km</em>
+                      </span>
+                    </div>
+                  </dd>
+                </div>
+              </dl>
+            </div>
           )}
         </section>
       )}
