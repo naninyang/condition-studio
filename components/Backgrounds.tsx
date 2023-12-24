@@ -1,9 +1,12 @@
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from '@emotion/styled';
+import useFetchData from '@/hooks/useFetchData';
+import { weatherState } from '@/state/atoms';
+import { getAddressFromDB } from '@/utils/indexedDB';
 import { StyleProps } from '@/types';
 import gradients from '@/components/Gradiants';
 import conditions from '@/components/Conditions';
-import { useRecoilValue } from 'recoil';
-import { weatherState } from '@/state/atoms';
 
 const Background = styled.div<StyleProps>(({ gradientItems }) => ({
   background: `radial-gradient(farthest-side at 100% 100%,${gradientItems})`,
@@ -11,6 +14,19 @@ const Background = styled.div<StyleProps>(({ gradientItems }) => ({
 
 export default function Backgrounds() {
   const weatherData = useRecoilValue(weatherState);
+
+  const [initialAddress, setInitialAddress] = useState<string>('');
+
+  useEffect(() => {
+    const fetchAddress = async () => {
+      const addressFromDB = await getAddressFromDB('address');
+      const newAddress = addressFromDB ? addressFromDB : '서울 중구 을지로 12';
+      setInitialAddress(newAddress);
+    };
+
+    fetchAddress();
+  }, []);
+  useFetchData(initialAddress);
 
   const originalIconUrl = weatherData?.current.condition.icon;
   const iconCode = originalIconUrl ? originalIconUrl.split('/').pop()?.split('.')[0] : undefined;
