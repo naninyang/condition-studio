@@ -9,18 +9,6 @@ const Background = styled.div<StyleProps>(({ gradientItems }) => ({
   background: `radial-gradient(farthest-side at 100% 100%,${gradientItems})`,
 }));
 
-const Icon = styled.i<StyleProps>(({ colorItems }) => ({
-  color: `${colorItems}`,
-}));
-
-const AirIcon = styled.i<StyleProps>(({ getStatus }) => ({
-  backgroundImage: `url(${getStatus})`,
-}));
-
-const Unit = styled.em<StyleProps>(({ colorItems }) => ({
-  color: `${colorItems}`,
-}));
-
 export default function Backgrounds() {
   const weatherData = useRecoilValue(weatherState);
 

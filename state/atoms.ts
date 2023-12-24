@@ -1,5 +1,5 @@
-import { AddressData, WeatherData } from '@/types';
 import { atom } from 'recoil';
+import { AddressData, WeatherData } from '@/types';
 
 export const weatherState = atom<WeatherData>({
   key: 'weatherState',

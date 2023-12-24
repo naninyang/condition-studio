@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from '@emotion/styled';
 import { StyleProps, WeatherProgressBarProps } from '@/types';
 import { addressState, weatherState } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
+import { getAddressFromDB } from '@/utils/indexedDB';
 import conditions from '@/components/Conditions';
 import colors from '@/components/Colors';
 import Header from '@/components/Header';
@@ -18,9 +19,21 @@ const Unit = styled.em<StyleProps>(({ colorItems }) => ({
 }));
 
 export default function Forecast() {
-  useFetchData('서울 중구 을지로 12');
   const addressData = useRecoilValue(addressState);
   const weatherData = useRecoilValue(weatherState);
+
+  const [initialAddress, setInitialAddress] = useState<string>('');
+
+  useEffect(() => {
+    const fetchAddress = async () => {
+      const addressFromDB = await getAddressFromDB('address');
+      const newAddress = addressFromDB ? addressFromDB : '서울 중구 을지로 12';
+      setInitialAddress(newAddress);
+    };
+
+    fetchAddress();
+  }, []);
+  useFetchData(initialAddress);
 
   const originalIconUrl = weatherData?.current.condition.icon;
   const iconCode = originalIconUrl ? originalIconUrl.split('/').pop()?.split('.')[0] : undefined;

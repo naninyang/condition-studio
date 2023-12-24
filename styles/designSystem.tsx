@@ -4,6 +4,9 @@ export const hex: { [key: string]: string } = {
   light: '#E2E2E3',
   background: '#0D0D0D',
   dark: '#1C1C1E',
+  daytime: '#FF4E50',
+  nighttime: '#000080',
+  accent: '#007AFF',
 };
 
 export const mq = {

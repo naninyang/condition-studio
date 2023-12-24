@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { SunrisesetProgressBarProps, StyleProps } from '@/types';
 import { addressState, weatherState } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
+import { getAddressFromDB } from '@/utils/indexedDB';
 import colors from '@/components/Colors';
 import styles from '@/styles/Home.module.sass';
 import MoonName from '@/components/Moon';
@@ -14,9 +15,21 @@ const Icon = styled.i<StyleProps>(({ colorItems }) => ({
 }));
 
 export default function Riseset() {
-  useFetchData('서울 중구 을지로 12');
   const addressData = useRecoilValue(addressState);
   const weatherData = useRecoilValue(weatherState);
+
+  const [initialAddress, setInitialAddress] = useState<string>('');
+
+  useEffect(() => {
+    const fetchAddress = async () => {
+      const addressFromDB = await getAddressFromDB('address');
+      const newAddress = addressFromDB ? addressFromDB : '서울 중구 을지로 12';
+      setInitialAddress(newAddress);
+    };
+
+    fetchAddress();
+  }, []);
+  useFetchData(initialAddress);
 
   const getColors = (code: number, isDay: number): string => {
     const color = colors[code] || colors[1000];

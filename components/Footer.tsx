@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from '@emotion/styled';
 import useFetchData from '@/hooks/useFetchData';
 import { StyleProps } from '@/types';
+import { getAddressFromDB } from '@/utils/indexedDB';
 import Anchor from './Anchor';
-import { useRecoilValue } from 'recoil';
 import { weatherState } from '@/state/atoms';
 import { hex } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
@@ -31,8 +33,19 @@ const Container = styled.footer<StyleProps>(({ isDay }) => ({
 }));
 
 export default function Footer() {
-  useFetchData('서울 중구 을지로 12');
   const weatherData = useRecoilValue(weatherState);
+  const [initialAddress, setInitialAddress] = useState<string>('');
+
+  useEffect(() => {
+    const fetchAddress = async () => {
+      const addressFromDB = await getAddressFromDB('address');
+      const newAddress = addressFromDB ? addressFromDB : '서울 중구 을지로 12';
+      setInitialAddress(newAddress);
+    };
+
+    fetchAddress();
+  }, []);
+  useFetchData(initialAddress);
 
   return (
     <>

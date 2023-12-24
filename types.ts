@@ -10,6 +10,7 @@ export interface GeocodeResponse {
       x: string;
     }>;
   };
+  error?: string;
 }
 
 export interface AddressData {

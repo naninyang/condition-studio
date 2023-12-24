@@ -9,4 +9,11 @@ export const icons = {
     lv7: require('./air/lv7.svg'),
     lv8: require('./air/lv8.svg'),
   },
+  ux: {
+    left: require('./ux/left.svg'),
+    refresh: require('./ux/refresh.svg'),
+    right: require('./ux/right.svg'),
+    search: require('./ux/search.svg'),
+    settings: require('./ux/settings.svg'),
+  },
 };

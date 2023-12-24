@@ -1,0 +1,139 @@
+@import './designSystem'
+
+.settings
+  display: flex
+  flex-direction: column
+  gap: rem(12)
+  position: relative
+
+  header
+    display: flex
+    justify-content: center
+    align-items: center
+    position: relative
+    height: rem(45)
+
+    button
+      background: none
+
+    button, a
+      display: inline-flex
+      justify-content: center
+      align-items: center
+      gap: rem(2)
+      position: absolute
+      top: 0
+      left: rem(7)
+      padding: 0 rem(7)
+      height: 100%
+
+      i
+        display: inline-block
+        width: rem(20)
+        height: rem(20)
+
+      span
+        +screen-reader-only
+
+    h1
+      font-size: rem(16)
+      font-weight: 900
+      line-height: 1
+
+  ol
+    display: flex
+    flex-direction: column
+    padding: 0 rem(12)
+
+    a
+      display: flex
+      align-items: center
+      height: rem(45)
+      font-size: rem(16)
+      font-weight: 700
+      color: $hex-white
+      line-height: 1
+      border-bottom: 1px solid $hex-light
+
+  .contain
+    display: flex
+    flex-direction: column
+    gap: rem(12)
+    padding: 0 rem(12)
+
+  fieldset
+    display: flex
+    background-color: $hex-light
+    overflow: hidden
+    border-radius: rem(12)
+    padding: 0 rem(12)
+
+    input
+      +col
+      background-color: transparent
+      border: 0
+      padding: rem(12)
+      font-size: rem(16)
+      font-weight: 700
+      line-height: 1
+      color: $hex-black
+      outline: 0
+
+    button
+      background-color: transparent
+      width: rem(48)
+      height: rem(48)
+
+      i
+        display: inline-block
+        width: rem(20)
+        height: rem(20)
+
+      span
+        +screen-reader-only
+
+  .notice
+    background-color: rgba(255,255,255,.7)
+    backdrop-filter: blur(rem(50))
+    border-radius: rem(12)
+    padding: rem(17)
+
+    dl
+      display: flex
+      flex-direction: column
+      gap: rem(17)
+
+      div
+        display: flex
+        flex-direction: column
+        gap: rem(5)
+        font-size: rem(14)
+        line-height: 1.27
+
+        dt
+          font-weight: 700
+          color: $hex-black
+
+        dd
+          color: $hex-dark
+
+  p
+    &.saved
+      background-color: $hex-white
+      border-radius: rem(12)
+      padding: rem(17)
+      font-size: rem(16)
+      color: $hex-black
+      letter-spacing: -.07em
+
+      strong
+        font-weight: 700
+        color: $hex-accent
+
+    &.error
+      background-color: $hex-black
+      border-radius: rem(12)
+      padding: rem(17)
+      font-size: rem(16)
+      font-weight: 900
+      letter-spacing: -.07em

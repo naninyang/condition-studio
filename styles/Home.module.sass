@@ -21,6 +21,25 @@
         font-weight: 900
         line-height: 1.42857143
 
+      .buttons
+        display: flex
+        gap: rem(5)
+
+        button, a
+          width: rem(25)
+          height: rem(25)
+
+          span
+            +screen-reader-only
+
+          i
+            display: inline-block
+            width: rem(25)
+            height: rem(25)
+
+        button
+          background: none
+
     footer
       display: flex
       justify-content: center
