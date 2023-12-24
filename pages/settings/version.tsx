@@ -60,7 +60,9 @@ export default function Version() {
             </li>
           </ul>
           <p>
-            <strong>‘Condition Studio v.0.1.0 βeta’</strong>
+            <strong>
+              <i>‘</i>Condition Studio v.0.1.0 βeta<i>’</i>
+            </strong>
           </p>
           <p>
             Copyright &copy; <strong>Condition Studio</strong>, <span>all rights reserved.</span>
