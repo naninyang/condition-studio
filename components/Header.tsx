@@ -21,7 +21,7 @@ const hexToRgb = (hex: string) => {
 };
 
 const Container = styled.header<StyleProps>(({ colorItems }) => ({
-  backgroundColor: colorItems ? `rgba(${hexToRgb(colorItems)},.7)` : undefined,
+  backgroundColor: colorItems ? `rgba(${hexToRgb(colorItems)},.2)` : undefined,
 }));
 
 const RefreshIcon = styled.i({
@@ -111,10 +111,10 @@ export default function Header() {
           <RefreshIcon />
         </button>
         {isDesktop ? (
-          <button type="button">
+          <Anchor href="/settings/location">
             <span>환경설정</span>
             <SettingsIcon />
-          </button>
+          </Anchor>
         ) : (
           <Anchor href="/settings">
             <span>환경설정</span>

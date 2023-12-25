@@ -2,9 +2,32 @@
 
 .settings
   display: flex
-  flex-direction: column
   gap: rem(12)
   position: relative
+
+  .nav
+    flex-direction: column
+    width: 100%
+
+  +mq(maxMedium)
+    flex-direction: column
+
+  +mq(minLarge)
+    min-height: 100dvh
+
+    nav
+      width: 37%
+      display: flex
+      flex-direction: column
+      gap: rem(37)
+      border-right: 1px solid $hex-light
+      padding: 0 rem(12)
+
+      ol
+        flex: 1
+
+    .content
+      +col
 
   header
     display: flex
@@ -69,6 +92,9 @@
     overflow: hidden
     border-radius: rem(12)
     padding: 0 rem(12)
+
+    +mq(minLarge)
+      margin-top: rem(37)
 
     input
       +col

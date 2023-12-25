@@ -1,15 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
 import fs from 'fs';
 import path from 'path';
 import { icons } from '@/icons';
 import Anchor from '@/components/Anchor';
+import SettingsMenu from '@/components/Settings';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Settings.module.sass';
 
 const BackwardIcon = styled.i({
   background: `url(${icons.ux.left}) no-repeat 50% 50%/contain`,
 });
+
+export function useDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  const desktop = useMediaQuery({ query: `(min-width: ${rem(992)} )` });
+  useEffect(() => {
+    setIsDesktop(desktop);
+  }, [desktop]);
+  return isDesktop;
+}
 
 function OpenSources({ licenses }: { licenses: string[] }) {
   const router = useRouter();
@@ -24,33 +36,51 @@ function OpenSources({ licenses }: { licenses: string[] }) {
     router.back();
   };
 
+  const isDesktop = useDesktop();
   const timestamp = Date.now();
+
   return (
     <main className={styles.settings}>
-      <header>
-        {loaded ? (
-          <button type="button" onClick={handleBackward}>
-            <BackwardIcon />
-            <span>환경설정으로 돌아가기</span>
-          </button>
-        ) : (
-          <Anchor href="/settings">
-            <BackwardIcon />
-            <span>환경설정으로 돌아가기</span>
-          </Anchor>
-        )}
-        <h1>오픈소스</h1>
-      </header>
-      <div className={styles.contain}>
-        <div className={styles.documents}>
-          {licenses.map((license, index) => (
-            <section key={index}>
-              <pre>
-                <code>{license}</code>
-              </pre>
-              <hr />
-            </section>
-          ))}
+      {isDesktop && (
+        <nav>
+          <SettingsMenu />
+        </nav>
+      )}
+      <div className={styles.content}>
+        <header>
+          {isDesktop ? (
+            <Anchor href="/">
+              <BackwardIcon />
+              <span>서비스 화면으로 돌아가기</span>
+            </Anchor>
+          ) : (
+            <>
+              {loaded ? (
+                <button type="button" onClick={handleBackward}>
+                  <BackwardIcon />
+                  <span>환경설정으로 돌아가기</span>
+                </button>
+              ) : (
+                <Anchor href="/settings">
+                  <BackwardIcon />
+                  <span>환경설정으로 돌아가기</span>
+                </Anchor>
+              )}
+            </>
+          )}
+          <h1>오픈소스</h1>
+        </header>
+        <div className={styles.contain}>
+          <div className={styles.documents}>
+            {licenses.map((license, index) => (
+              <section key={index}>
+                <pre>
+                  <code>{license}</code>
+                </pre>
+                <hr />
+              </section>
+            ))}
+          </div>
         </div>
       </div>
     </main>

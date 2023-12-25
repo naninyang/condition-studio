@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
 import { GeocodeResponse } from '@/types';
 import { saveAddressToDB } from '@/utils/indexedDB';
 import { icons } from '@/icons';
 import Anchor from '@/components/Anchor';
+import SettingsMenu from '@/components/Settings';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Settings.module.sass';
 
 const BackwardIcon = styled.i({
@@ -14,6 +17,15 @@ const BackwardIcon = styled.i({
 const SearchIcon = styled.i({
   background: `url(${icons.ux.search}) no-repeat 50% 50%/contain`,
 });
+
+export function useDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  const desktop = useMediaQuery({ query: `(min-width: ${rem(992)} )` });
+  useEffect(() => {
+    setIsDesktop(desktop);
+  }, [desktop]);
+  return isDesktop;
+}
 
 export default function Location() {
   const router = useRouter();
@@ -62,70 +74,88 @@ export default function Location() {
     }
   };
 
+  const isDesktop = useDesktop();
+
   return (
     <div className={styles.settings}>
-      <header>
-        {loaded ? (
-          <button type="button" onClick={handleBackward}>
-            <BackwardIcon />
-            <span>환경설정으로 돌아가기</span>
-          </button>
-        ) : (
-          <Anchor href="/settings">
-            <BackwardIcon />
-            <span>환경설정으로 돌아가기</span>
-          </Anchor>
-        )}
-        <h1>위치설정</h1>
-      </header>
-      <div className={styles.contain}>
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            <legend>위치 검색폼</legend>
-            <input
-              type="search"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="찾고싶은 위치(주소) 입력"
-            />
-            <button type="submit">
-              <SearchIcon />
-              <span>검색</span>
-            </button>
-          </fieldset>
-        </form>
-        <div className={styles.notice}>
-          <dl>
-            <div>
-              <dt>지자체 이름은 짧은이름으로 입력해 주세요.</dt>
-              <dd>
-                이를테면 <code>서울특별시</code>라면 <code>서울</code>로 입력해야 합니다.
-              </dd>
-            </div>
-            <div>
-              <dt>검색시 시, 구, 동, 리 순서로 입력해야 합니다.</dt>
-              <dd>
-                이를테면 <code>서울 중구 명동</code>으로 입력해야 합니다.
-              </dd>
-            </div>
-            <div>
-              <dt>지자체 이름은 필수이며, 2차 지자체 이름 생략하고 3차 지자체 이름을 검색할 수 없습니다.</dt>
-              <dd>
-                이를테면 <code>서울 명동</code>으로 입력하면 안되고 <code>서울 중구 명동</code>으로 입력해야 합니다.
-              </dd>
-            </div>
-          </dl>
+      {isDesktop && (
+        <nav>
+          <SettingsMenu />
+        </nav>
+      )}
+      <div className={styles.content}>
+        <header>
+          {isDesktop ? (
+            <Anchor href="/">
+              <BackwardIcon />
+              <span>서비스 화면으로 돌아가기</span>
+            </Anchor>
+          ) : (
+            <>
+              {loaded ? (
+                <button type="button" onClick={handleBackward}>
+                  <BackwardIcon />
+                  <span>환경설정으로 돌아가기</span>
+                </button>
+              ) : (
+                <Anchor href="/settings">
+                  <BackwardIcon />
+                  <span>환경설정으로 돌아가기</span>
+                </Anchor>
+              )}
+            </>
+          )}
+          <h1>위치설정</h1>
+        </header>
+        <div className={styles.contain}>
+          <form onSubmit={handleSubmit}>
+            <fieldset>
+              <legend>위치 검색폼</legend>
+              <input
+                type="search"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="찾고싶은 위치(주소) 입력"
+              />
+              <button type="submit">
+                <SearchIcon />
+                <span>검색</span>
+              </button>
+            </fieldset>
+          </form>
+          <div className={styles.notice}>
+            <dl>
+              <div>
+                <dt>지자체 이름은 짧은이름으로 입력해 주세요.</dt>
+                <dd>
+                  이를테면 <code>서울특별시</code>라면 <code>서울</code>로 입력해야 합니다.
+                </dd>
+              </div>
+              <div>
+                <dt>검색시 시, 구, 동, 리 순서로 입력해야 합니다.</dt>
+                <dd>
+                  이를테면 <code>서울 중구 명동</code>으로 입력해야 합니다.
+                </dd>
+              </div>
+              <div>
+                <dt>지자체 이름은 필수이며, 2차 지자체 이름 생략하고 3차 지자체 이름을 검색할 수 없습니다.</dt>
+                <dd>
+                  이를테면 <code>서울 명동</code>으로 입력하면 안되고 <code>서울 중구 명동</code>으로 입력해야 합니다.
+                </dd>
+              </div>
+            </dl>
+          </div>
+          {sidoName && (
+            <p className={styles.saved}>
+              저장된 위치는{' '}
+              <strong>
+                {sidoName} {ssgName !== 'null' && <span>{ssgName}</span>} {admName !== 'null' && <span>{admName}</span>}
+              </strong>{' '}
+              입니다.
+            </p>
+          )}
+          {error && <p className={styles.error}>{error}</p>}
         </div>
-        {sidoName && (
-          <p className={styles.saved}>
-            저장된 위치는{' '}
-            <strong>
-              {sidoName} {ssgName !== 'null' && <span>{ssgName}</span>} {admName !== 'null' && <span>{admName}</span>}
-            </strong>{' '}
-            입니다.
-          </p>
-        )}
-        {error && <p className={styles.error}>{error}</p>}
       </div>
     </div>
   );
