@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
 import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
+import useFetchData from '@/hooks/useFetchData';
 import { GeocodeResponse } from '@/types';
-import { saveAddressToDB } from '@/utils/indexedDB';
+import { addressState, weatherState } from '@/state/atoms';
+import { getAddressFromDB, saveAddressToDB } from '@/utils/indexedDB';
 import { icons } from '@/icons';
 import Anchor from '@/components/Anchor';
 import SettingsMenu from '@/components/Settings';
@@ -76,6 +79,22 @@ export default function Location() {
 
   const isDesktop = useDesktop();
 
+  const addressData = useRecoilValue(addressState);
+  const [initialAddress, setInitialAddress] = useState<string>('');
+
+  useEffect(() => {
+    const fetchAddress = async () => {
+      const addressFromDB = await getAddressFromDB('address');
+      const newAddress = addressFromDB ? addressFromDB : '서울 중구 을지로 12';
+      setInitialAddress(newAddress);
+    };
+
+    fetchAddress();
+  }, []);
+  useFetchData(initialAddress);
+
+  const weatherData = useRecoilValue(weatherState);
+
   return (
     <div className={styles.settings}>
       {isDesktop && (
@@ -138,14 +157,14 @@ export default function Location() {
                 </dd>
               </div>
               <div>
-                <dt>지자체 이름은 필수이며, 2차 지자체 이름 생략하고 3차 지자체 이름을 검색할 수 없습니다.</dt>
+                <dt>지자체 이름은 필수이며, 2차 지자체를 생략하고 3차 지자체를 바로 검색할 수 없습니다.</dt>
                 <dd>
                   이를테면 <code>서울 명동</code>으로 입력하면 안되고 <code>서울 중구 명동</code>으로 입력해야 합니다.
                 </dd>
               </div>
             </dl>
           </div>
-          {sidoName && (
+          {sidoName ? (
             <p className={styles.saved}>
               저장된 위치는{' '}
               <strong>
@@ -153,6 +172,21 @@ export default function Location() {
               </strong>{' '}
               입니다.
             </p>
+          ) : (
+            <>
+              {addressData && (
+                <>
+                  <p className={styles.saved}>
+                    저장된 위치는{' '}
+                    <strong>
+                      {addressData.sido_nm} {addressData.sgg_nm !== 'null' && <span>{addressData.sgg_nm}</span>}{' '}
+                      {addressData.adm_nm !== 'null' && <span>{addressData.adm_nm}</span>}
+                    </strong>{' '}
+                    입니다.
+                  </p>
+                </>
+              )}
+            </>
           )}
           {error && <p className={styles.error}>{error}</p>}
         </div>
