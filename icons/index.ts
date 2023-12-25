@@ -9,6 +9,10 @@ export const icons = {
     lv7: require('./air/lv7.svg'),
     lv8: require('./air/lv8.svg'),
   },
+  downloads: {
+    pwa: require('./downloads/pwa.svg'),
+    safari: require('./downloads/safari.svg'),
+  },
   loading: {
     loading1: require('./loading/loading1.svg'),
     loading2: require('./loading/loading2.svg'),

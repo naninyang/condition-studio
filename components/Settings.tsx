@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useMediaQuery } from 'react-responsive';
+import { isSafari } from 'react-device-detect';
 import styled from '@emotion/styled';
 import { icons } from '@/icons';
 import Anchor from '@/components/Anchor';
@@ -8,6 +9,14 @@ import { rem } from '@/styles/designSystem';
 
 const BackwardIcon = styled.i({
   background: `url(${icons.ux.left}) no-repeat 50% 50%/contain`,
+});
+
+const SafariIcon = styled.i({
+  background: `url(${icons.downloads.safari}) no-repeat 50% 50%/contain`,
+});
+
+const PwaIcon = styled.i({
+  background: `url(${icons.downloads.pwa}) no-repeat 50% 50%/contain`,
 });
 
 export function useDesktop() {
@@ -33,6 +42,30 @@ export default function SettingsMenu() {
   };
 
   const isDesktop = useDesktop();
+
+  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
+  const [deviceSafari, setDeviceSafari] = useState<string>();
+
+  const onInstallPWA = () => {
+    if (deferredPrompt) {
+      const promptEvent = deferredPrompt as any;
+      promptEvent.prompt();
+      promptEvent.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        setDeferredPrompt(null);
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSafari) {
+      setDeviceSafari('isSafari');
+    }
+  }, []);
 
   return (
     <>
@@ -80,6 +113,21 @@ export default function SettingsMenu() {
           <Anchor href="/settings/version">버전정보</Anchor>
         </li>
       </ol>
+      {deviceSafari === 'isSafari' ? (
+        <div data-device="safari">
+          <Anchor href="/safari">
+            <span>Safari 앱 내려받기</span>
+            <SafariIcon />
+          </Anchor>
+        </div>
+      ) : (
+        <div data-device="chrome">
+          <button type="button" onClick={onInstallPWA}>
+            <span>앱 내려받기</span>
+            <PwaIcon />
+          </button>
+        </div>
+      )}
     </>
   );
 }
