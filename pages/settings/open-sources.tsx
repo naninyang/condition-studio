@@ -43,9 +43,12 @@ function OpenSources({ licenses }: { licenses: string[] }) {
     <main className={styles.settings}>
       <Seo pageTitle="오픈소스" />
       {isDesktop && (
-        <nav>
-          <SettingsMenu />
-        </nav>
+        <>
+          <nav>
+            <SettingsMenu />
+          </nav>
+          <hr />
+        </>
       )}
       <div className={styles.content}>
         <header>

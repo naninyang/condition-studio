@@ -2,7 +2,6 @@
 
 .settings
   display: flex
-  gap: rem(12)
   position: relative
 
   .nav
@@ -11,6 +10,7 @@
 
   +mq(maxMedium)
     flex-direction: column
+    gap: rem(12)
 
   +mq(minLarge)
     min-height: 100dvh
@@ -20,11 +20,14 @@
       display: flex
       flex-direction: column
       gap: rem(37)
-      border-right: 1px solid $hex-light
-      padding: 0 rem(12)
 
       ol
         flex: 1
+
+    & + hr
+      margin: 0
+      border: 0
+      border-left: 1px solid $hex-light
 
     .content
       +col
@@ -172,13 +175,6 @@
       font-weight: 900
       letter-spacing: -.07em
 
-  hr
-    margin: rem(20) 0
-    border: 1px solid $hex-light
-
-    +mq(minLarge)
-      margin: rem(25) 0
-
   .documents
     background-color: rgba(0,0,0,.7)
     backdrop-filter: blur(rem(50))
@@ -188,6 +184,13 @@
 
     & :last-of-type hr
       display: none
+
+    hr
+      margin: rem(20) 0
+      border: 1px solid $hex-light
+
+      +mq(minLarge)
+        margin: rem(25) 0
 
     pre, code
       white-space: pre-wrap

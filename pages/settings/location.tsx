@@ -98,9 +98,12 @@ export default function Location() {
     <div className={styles.settings}>
       <Seo pageTitle="위치설정" />
       {isDesktop && (
-        <nav>
-          <SettingsMenu />
-        </nav>
+        <>
+          <nav>
+            <SettingsMenu />
+          </nav>
+          <hr />
+        </>
       )}
       <div className={styles.content}>
         <header>

@@ -41,9 +41,12 @@ export default function Version() {
     <main className={styles.settings}>
       <Seo pageTitle="버전정보" />
       {isDesktop && (
-        <nav>
-          <SettingsMenu />
-        </nav>
+        <>
+          <nav>
+            <SettingsMenu />
+          </nav>
+          <hr />
+        </>
       )}
       <div className={styles.content}>
         <header>
