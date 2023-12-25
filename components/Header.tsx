@@ -1,12 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
+import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
 import useFetchData from '@/hooks/useFetchData';
-import { addressState } from '@/state/atoms';
+import { addressState, weatherState } from '@/state/atoms';
 import { getAddressFromDB } from '@/utils/indexedDB';
 import { icons } from '@/icons';
+import { StyleProps } from '@/types';
 import Anchor from './Anchor';
+import colors from './Colors';
+import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
+
+const hexToRgb = (hex: string) => {
+  let cleanHex = hex.replace('#', '');
+  let r = parseInt(cleanHex.substring(0, 2), 16);
+  let g = parseInt(cleanHex.substring(2, 4), 16);
+  let b = parseInt(cleanHex.substring(4, 6), 16);
+  return `${r}, ${g}, ${b}`;
+};
+
+const Container = styled.header<StyleProps>(({ colorItems }) => ({
+  backgroundColor: colorItems ? `rgba(${hexToRgb(colorItems)},.7)` : undefined,
+}));
 
 const RefreshIcon = styled.i({
   background: `url(${icons.ux.refresh}) no-repeat 50% 50%/contain`,
@@ -15,6 +31,15 @@ const RefreshIcon = styled.i({
 const SettingsIcon = styled.i({
   background: `url(${icons.ux.settings}) no-repeat 50% 50%/contain`,
 });
+
+export function useDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  const desktop = useMediaQuery({ query: `(min-width: ${rem(992)} )` });
+  useEffect(() => {
+    setIsDesktop(desktop);
+  }, [desktop]);
+  return isDesktop;
+}
 
 export default function Header() {
   const [seoulDate, setSeoulDate] = useState<string>('');
@@ -33,6 +58,13 @@ export default function Header() {
     fetchAddress();
   }, []);
   useFetchData(initialAddress);
+
+  const weatherData = useRecoilValue(weatherState);
+  const getColors = (code: number, isDay: number): string => {
+    const color = colors[code] || colors[1000];
+    return isDay ? color.day : color.night;
+  };
+  const colorItems = weatherData && getColors(weatherData.current.condition.code, weatherData.current.is_day);
 
   useEffect(() => {
     const now = new Date();
@@ -57,8 +89,10 @@ export default function Header() {
     window.location.reload();
   };
 
+  const isDesktop = useDesktop();
+
   return (
-    <header>
+    <Container colorItems={colorItems}>
       <h1>컨디션 스튜디오</h1>
       <p>
         <span>
@@ -76,11 +110,18 @@ export default function Header() {
           <span>새로고침</span>
           <RefreshIcon />
         </button>
-        <Anchor href="/settings">
-          <span>환경설정</span>
-          <SettingsIcon />
-        </Anchor>
+        {isDesktop ? (
+          <button type="button">
+            <span>환경설정</span>
+            <SettingsIcon />
+          </button>
+        ) : (
+          <Anchor href="/settings">
+            <span>환경설정</span>
+            <SettingsIcon />
+          </Anchor>
+        )}
       </div>
-    </header>
+    </Container>
   );
 }

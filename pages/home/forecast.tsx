@@ -7,7 +7,6 @@ import useFetchData from '@/hooks/useFetchData';
 import { getAddressFromDB } from '@/utils/indexedDB';
 import conditions from '@/components/Conditions';
 import colors from '@/components/Colors';
-import Header from '@/components/Header';
 import styles from '@/styles/Home.module.sass';
 
 const Icon = styled.i<StyleProps>(({ colorItems }) => ({
@@ -99,7 +98,6 @@ export default function Forecast() {
     <>
       {addressData && (
         <section className={styles.forecast}>
-          <Header />
           {weatherData && (
             <div className={styles.contain}>
               <div className={`${styles.hour} ${styles.module}`}>

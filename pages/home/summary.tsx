@@ -87,8 +87,8 @@ export default function Summary() {
                       <span>
                         <strong>기온</strong>
                         <em>
-                          {weatherData.forecast.forecastday[0].day.maxtemp_c} °C /{' '}
-                          {weatherData.forecast.forecastday[0].day.mintemp_c} °C
+                          {weatherData.forecast.forecastday[0].day.mintemp_c} °C ~{' '}
+                          {weatherData.forecast.forecastday[0].day.maxtemp_c} °C
                         </em>
                       </span>
                     </div>
@@ -103,10 +103,10 @@ export default function Summary() {
                           `
                         </i>
                         <span>
-                          <strong>강수량 (비올 확률)</strong>
+                          <strong>강수량</strong>
                           <em>
-                            {weatherData.current.precip_mm} mm (
-                            {weatherData.forecast.forecastday[0].day.daily_chance_of_rain} %)
+                            {weatherData.current.precip_mm} mm,{' '}
+                            {weatherData.forecast.forecastday[0].day.daily_chance_of_rain} %
                           </em>
                         </span>
                       </div>
@@ -124,7 +124,7 @@ export default function Summary() {
                         <span>
                           <strong>적설량</strong>
                           <em>
-                            {weatherData.forecast.forecastday[0].day.totalsnow_cm} cm /{' '}
+                            {weatherData.forecast.forecastday[0].day.totalsnow_cm} cm,{' '}
                             {weatherData.forecast.forecastday[0].day.daily_chance_of_snow} %
                           </em>
                         </span>
