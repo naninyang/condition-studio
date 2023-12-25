@@ -93,8 +93,6 @@ export default function Location() {
   }, []);
   useFetchData(initialAddress);
 
-  const weatherData = useRecoilValue(weatherState);
-
   return (
     <div className={styles.settings}>
       {isDesktop && (

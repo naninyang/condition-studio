@@ -35,7 +35,6 @@ export default function Riseset() {
     const color = colors[code] || colors[1000];
     return isDay ? color.day : color.night;
   };
-  const colorItems = weatherData && getColors(weatherData.current.condition.code, weatherData.current.is_day);
 
   function formatTime(timeString: string) {
     const todayDateString = new Date().toDateString();
@@ -194,7 +193,7 @@ export default function Riseset() {
               </div>
             </div>
           )}
-          <Footer />
+          {/* <Footer /> */}
         </section>
       )}
     </>

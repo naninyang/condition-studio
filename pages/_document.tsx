@@ -12,14 +12,14 @@ export default function Document() {
         <link href="/manifest.json" rel="manifest" />
         <meta name="application-name" content="Condition Studio" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="Black-translucent" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content="Condition Studio" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <meta name="msapplication-TileColor" content="#ff4e50" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content="#ff4e50" />
+        <meta name="theme-color" content="#000000" />
         <link
           rel="apple-touch-startup-image"
           media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
