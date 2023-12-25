@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { AppProps } from 'next/app';
 import { Noto_Sans_KR } from 'next/font/google';
 import localFont from 'next/font/local';
@@ -13,6 +14,15 @@ const fontNoto = Noto_Sans_KR({
 const weatherIcons = localFont({ src: '../fonts/dripicons-weather.woff' });
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      const registInit = async () => {
+        const registration = await navigator.serviceWorker.register('/service-worker.js');
+        registration.waiting?.postMessage('SKIP_WAITING');
+      };
+      registInit();
+    }
+  }, []);
   return (
     <RecoilRoot>
       <style jsx global>

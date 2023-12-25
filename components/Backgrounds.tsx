@@ -7,6 +7,7 @@ import { getAddressFromDB } from '@/utils/indexedDB';
 import { StyleProps } from '@/types';
 import gradients from '@/components/Gradiants';
 import conditions from '@/components/Conditions';
+import Loading from './Loading';
 
 const Background = styled.div<StyleProps>(({ gradientItems }) => ({
   background: `radial-gradient(farthest-side at 100% 100%,${gradientItems})`,
@@ -48,7 +49,7 @@ export default function Backgrounds() {
       ) : (
         <p className="loading">
           <span>로딩 중</span>
-          <i />
+          <Loading />
         </p>
       )}
       {iconCode && (
