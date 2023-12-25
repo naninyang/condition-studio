@@ -5,9 +5,10 @@ import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
 import useFetchData from '@/hooks/useFetchData';
 import { GeocodeResponse } from '@/types';
-import { addressState, weatherState } from '@/state/atoms';
+import { addressState } from '@/state/atoms';
 import { getAddressFromDB, saveAddressToDB } from '@/utils/indexedDB';
 import { icons } from '@/icons';
+import Seo from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import SettingsMenu from '@/components/Settings';
 import { rem } from '@/styles/designSystem';
@@ -95,6 +96,7 @@ export default function Location() {
 
   return (
     <div className={styles.settings}>
+      <Seo pageTitle="위치설정" />
       {isDesktop && (
         <nav>
           <SettingsMenu />

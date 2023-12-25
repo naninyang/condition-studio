@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Seo from '@/components/Seo';
 import Summary from './home/summary';
 import Forecast from './home/forecast';
 import Everything from './home/everything';
@@ -13,6 +14,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <Seo pageTitle="날씨의 모든 것" />
       <Summary />
       <Forecast />
       <Everything />

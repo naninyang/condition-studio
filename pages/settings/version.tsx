@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
 import { icons } from '@/icons';
+import Seo from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import SettingsMenu from '@/components/Settings';
 import { rem } from '@/styles/designSystem';
@@ -38,6 +39,7 @@ export default function Version() {
 
   return (
     <main className={styles.settings}>
+      <Seo pageTitle="버전정보" />
       {isDesktop && (
         <nav>
           <SettingsMenu />

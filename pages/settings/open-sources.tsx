@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import fs from 'fs';
 import path from 'path';
 import { icons } from '@/icons';
+import Seo from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import SettingsMenu from '@/components/Settings';
 import { rem } from '@/styles/designSystem';
@@ -37,10 +38,10 @@ function OpenSources({ licenses }: { licenses: string[] }) {
   };
 
   const isDesktop = useDesktop();
-  const timestamp = Date.now();
 
   return (
     <main className={styles.settings}>
+      <Seo pageTitle="오픈소스" />
       {isDesktop && (
         <nav>
           <SettingsMenu />
