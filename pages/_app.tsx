@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
 import { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { Noto_Sans_KR } from 'next/font/google';
 import localFont from 'next/font/local';
+import Script from 'next/script';
 import { RecoilRoot } from 'recoil';
-import '@/styles/globals.sass';
+import { GA_TRACKING_ID, pageview } from '@/utils/gtag';
 import Backgrounds from '@/components/Backgrounds';
+import '@/styles/globals.sass';
 
 const fontNoto = Noto_Sans_KR({
   weight: ['100', '300', '400', '700', '900'],
@@ -23,8 +26,31 @@ export default function App({ Component, pageProps }: AppProps) {
       registInit();
     }
   }, []);
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url: any) => {
+      pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on('hashChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off('hashChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <RecoilRoot>
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_TRACKING_ID}', {
+            page_path: window.location.pathname,
+          });
+        `}
+      </Script>
       <style jsx global>
         {`
           body,
