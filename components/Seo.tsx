@@ -20,7 +20,7 @@ const Seo = ({ pageTitle, pageDescription, pageImgWidth, pageImgHeight, pageOgTy
   const defaultDescription = '날씨의 모든 것';
   const description = pageDescription || defaultDescription;
   const url = `${domain}${pagePath}`;
-  const imgUrl = `${domain}og-image.png?ts=${timestamp}`;
+  const imgUrl = `${domain}/og-image.png?ts=${timestamp}`;
   const imgWidth = pageImgWidth || 1280;
   const imgHeight = pageImgHeight || 630;
   const ogType = pageOgType || 'website';
