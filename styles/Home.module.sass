@@ -507,8 +507,6 @@
               color: $hex-black
 
   .riseset
-    padding-bottom: rem(77)
-
     .contain
       .sun
         .list
@@ -617,3 +615,51 @@
 
             dt
               color: $hex-black
+
+  .update
+    padding-bottom: rem(77)
+
+    .contain
+      .module
+        width: auto
+
+        +mq(maxMedium)
+          width: calc(100% - rem(50))
+
+        p
+          padding: 0 rem(25)
+          font-size: rem(14)
+          color: $hex-dark
+
+        .list
+          dl
+            display: flex
+            flex-direction: column
+            gap: rem(27)
+            padding: 0 rem(25) rem(25)
+
+            +mq(minLarge)
+              gap: rem(12)
+
+            div
+              display: flex
+              gap: rem(7)
+
+              +mq(maxMedium)
+                flex-direction: column
+
+              +mq(minLarge)
+                justify-content: space-between
+                gap: rem(27)
+
+              dt, dd
+                line-height: 1
+
+              dt
+                font-size: rem(14)
+                color: $hex-dark
+
+              dd
+                font-size: rem(16)
+                font-weight: 700
+                color: $hex-accent

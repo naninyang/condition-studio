@@ -4,6 +4,7 @@ import Summary from './home/summary';
 import Forecast from './home/forecast';
 import Everything from './home/everything';
 import Riseset from './home/riseset';
+import Update from './home/update';
 import styles from '@/styles/Home.module.sass';
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <Forecast />
       <Everything />
       <Riseset />
+      <Update />
     </main>
   );
 }
