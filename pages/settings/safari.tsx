@@ -82,7 +82,7 @@ export default function Version() {
                 버튼을 터치 합니다.
               </p>
               <div className={styles.images}>
-                <Image src="/iphone1.webp" width="400" height="867" alt="" />
+                <Image src="/iphone1.webp" width="400" height="867" alt="" priority />
                 <Image src="/iphone2.webp" width="400" height="867" alt="" />
                 <Image src="/iphone3.webp" width="400" height="867" alt="" />
               </div>
