@@ -115,7 +115,7 @@ export default function SettingsMenu() {
       </ol>
       {deviceSafari === 'isSafari' ? (
         <div data-device="safari">
-          <Anchor href="/safari">
+          <Anchor href="/settings/safari">
             <span>Safari 앱 내려받기</span>
             <SafariIcon />
           </Anchor>

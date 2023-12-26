@@ -10,10 +10,10 @@ export default function Document() {
         <link href="/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
         <link href="/favicon/favicon.ico" rel="shortcut icon" />
         <link href="/manifest.json" rel="manifest" />
-        <meta name="application-name" content="Condition Studio" />
+        <meta name="application-name" content="컨디션스튜디오" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="apple-mobile-web-app-title" content="Condition Studio" />
+        <meta name="apple-mobile-web-app-title" content="컨디션스튜디오" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
