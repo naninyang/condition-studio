@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactElement, ReactNode, useEffect } from 'react';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { Noto_Sans_KR } from 'next/font/google';
@@ -16,7 +16,7 @@ const fontNoto = Noto_Sans_KR({
 
 const weatherIcons = localFont({ src: './fonts/dripicons-weather.woff' });
 
-const Provider = ProviderJotai as unknown as (props: { children: ReactNode }) => JSX.Element;
+const Provider = ProviderJotai as unknown as (props: { children: ReactNode }) => ReactElement;
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
