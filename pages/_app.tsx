@@ -40,8 +40,8 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error 타입 시스템 충돌 무시 (React 19 + Jotai 2.1.x 문제)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     <Provider>
       <Script id="google-analytics">
         {`
