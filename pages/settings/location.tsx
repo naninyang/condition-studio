@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
 import useFetchData from '@/hooks/useFetchData';
 import { GeocodeResponse } from '@/types';
-import { addressState } from '@/state/atoms';
+import { addressAtom } from '@/state/atoms';
 import { getAddressFromDB, saveAddressToDB } from '@/utils/indexedDB';
-import { icons } from '@/icons';
 import Seo from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import SettingsMenu from '@/components/Settings';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Settings.module.sass';
+import { IconUxLeft, IconUxSearch } from '@/components/icons';
 
 const BackwardIcon = styled.i({
-  background: `url(${icons.ux.left}) no-repeat 50% 50%/contain`,
+  background: `url(${IconUxLeft.src}) no-repeat 50% 50%/contain`,
 });
 
 const SearchIcon = styled.i({
-  background: `url(${icons.ux.search}) no-repeat 50% 50%/contain`,
+  background: `url(${IconUxSearch.src}) no-repeat 50% 50%/contain`,
 });
 
 export function useDesktop() {
@@ -80,7 +80,7 @@ export default function Location() {
 
   const isDesktop = useDesktop();
 
-  const addressData = useRecoilValue(addressState);
+  const addressData = useAtomValue(addressAtom);
   const [initialAddress, setInitialAddress] = useState<string>('');
 
   useEffect(() => {

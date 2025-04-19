@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 import styled from '@emotion/styled';
 import { StyleProps, WeatherProgressBarProps } from '@/types';
-import { addressState, weatherState } from '@/state/atoms';
+import { addressAtom, weatherAtom } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
 import { getAddressFromDB } from '@/utils/indexedDB';
 import conditions from '@/components/Conditions';
@@ -18,8 +18,8 @@ const Unit = styled.em<StyleProps>(({ colorItems }) => ({
 }));
 
 export default function Forecast() {
-  const addressData = useRecoilValue(addressState);
-  const weatherData = useRecoilValue(weatherState);
+  const addressData = useAtomValue(addressAtom);
+  const weatherData = useAtomValue(weatherAtom);
 
   const [initialAddress, setInitialAddress] = useState<string>('');
 
@@ -73,7 +73,9 @@ export default function Forecast() {
     return new Date();
   };
 
-  const WeatherProgressBar: React.FC<WeatherProgressBarProps> = ({ minTemp, maxTemp, colorItems }) => {
+  const WeatherProgressBar = ({ minTemp, maxTemp, colorItems }: WeatherProgressBarProps) => {
+    if (!weatherData) return null;
+
     const totalMinTemp = Math.min(...weatherData.forecast.forecastday.map((day) => day.day.mintemp_c));
     const totalMaxTemp = Math.max(...weatherData.forecast.forecastday.map((day) => day.day.maxtemp_c));
 

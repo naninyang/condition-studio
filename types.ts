@@ -114,7 +114,7 @@ export interface ConditionsMap {
 export interface WeatherProgressBarProps {
   minTemp: number;
   maxTemp: number;
-  colorItems: string;
+  colorItems?: string;
 }
 
 export interface SunrisesetProgressBarProps {

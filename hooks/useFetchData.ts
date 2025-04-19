@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { addressState, weatherState } from '@/state/atoms';
+import { useSetAtom } from 'jotai';
+import { addressAtom, weatherAtom } from '@/state/atoms';
 import { GeocodeResponse } from '@/types';
 
 const useFetchData = (initialAddress: string) => {
-  const setWeatherData = useSetRecoilState(weatherState);
-  const setAddressData = useSetRecoilState(addressState);
+  const setWeatherData = useSetAtom(weatherAtom);
+  const setAddressData = useSetAtom(addressAtom);
 
   useEffect(() => {
     async function fetchData() {

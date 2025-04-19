@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 import styled from '@emotion/styled';
 import useFetchData from '@/hooks/useFetchData';
-import { weatherState } from '@/state/atoms';
+import { weatherAtom } from '@/state/atoms';
 import { getAddressFromDB } from '@/utils/indexedDB';
 import { StyleProps } from '@/types';
 import gradients from '@/components/Gradiants';
@@ -14,7 +14,7 @@ const Background = styled.div<StyleProps>(({ gradientItems }) => ({
 }));
 
 export default function Backgrounds() {
-  const weatherData = useRecoilValue(weatherState);
+  const weatherData = useAtomValue(weatherAtom);
 
   const [initialAddress, setInitialAddress] = useState<string>('');
 
@@ -55,7 +55,7 @@ export default function Backgrounds() {
       {iconCode && (
         <div className="background-condition">
           <i className="icon" aria-hidden>
-            {getIcon(weatherData.current.is_day, parseInt(iconCode))}
+            {weatherData && getIcon(weatherData.current.is_day, parseInt(iconCode))}
           </i>
         </div>
       )}

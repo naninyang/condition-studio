@@ -1,17 +1,15 @@
-@import './designSystem'
-
 *, ::before, ::after
   box-sizing: border-box
 
 \::selection
-  background-color: $hex-black
-  color: $hex-white
+  background-color: ds.$hex-black
+  color: ds.$hex-white
 
 html
   font-size: 16px
 
 body
-  background-color: $hex-white
+  background-color: ds.$hex-white
   margin: 0
   font-size: 16px
   word-break: keep-all
@@ -22,7 +20,7 @@ body, pre, input, button, textarea, select
   font-weight: 400
   text-size-adjust: 100%
   text-rendering: optimizeLegibility
-  color: $hex-white
+  color: ds.$hex-white
   -webkit-font-smoothing: antialiased
 
 h1, h2, h3, h4, h5, h6
@@ -30,7 +28,7 @@ h1, h2, h3, h4, h5, h6
   margin-bottom: 0
 
 img
-  +image-rendering
+  +ds.image-rendering
 
 a
   text-decoration: none
@@ -97,17 +95,17 @@ iframe
     position: fixed
     bottom: 0
     right: 0
-    width: rem(270)
-    height: rem(270)
+    width: ds.rem(270)
+    height: ds.rem(270)
     overflow: hidden
 
     i
       position: absolute
       width: 100%
       height: 100%
-      font-size: rem(370)
+      font-size: ds.rem(370)
       font-style: normal
-      color: $hex-white
+      color: ds.$hex-white
 
 .loading
   position: fixed
@@ -118,45 +116,45 @@ iframe
   display: flex
   justify-content: center
   align-items: center
-  background-color: $hex-white
+  background-color: ds.$hex-white
 
   span
-    +screen-reader-only
+    +ds.screen-reader-only
 
   i
     display: block
-    width: rem(50)
-    height: rem(50)
-    border: rem(5) solid transparent
+    width: ds.rem(50)
+    height: ds.rem(50)
+    border: ds.rem(5) solid transparent
     border-radius: 50%
     animation: spin 4s cubic-bezier(.4,0,.2,1) infinite
 
 @keyframes spin
   0%
     transform: rotate(0deg)
-    border-right-color: $hex-daytime
-    border-bottom-color: $hex-daytime
+    border-right-color: ds.$hex-daytime
+    border-bottom-color: ds.$hex-daytime
 
   25%
     transform: rotate(360deg)
-    border: rem(5) solid transparent
-    border-bottom-color: $hex-daytime
-    border-left-color: $hex-daytime
+    border: ds.rem(5) solid transparent
+    border-bottom-color: ds.$hex-daytime
+    border-left-color: ds.$hex-daytime
 
   50%
     transform: rotate(720deg)
-    border: rem(5) solid transparent
-    border-top-color: $hex-daytime
-    border-left-color: $hex-daytime
+    border: ds.rem(5) solid transparent
+    border-top-color: ds.$hex-daytime
+    border-left-color: ds.$hex-daytime
 
   75%
     transform: rotate(1080deg)
-    border: rem(5) solid transparent
-    border-top-color: $hex-daytime
-    border-right-color: $hex-daytime
+    border: ds.rem(5) solid transparent
+    border-top-color: ds.$hex-daytime
+    border-right-color: ds.$hex-daytime
 
   100%
     transform: rotate(1440deg)
-    border: rem(5) solid transparent
-    border-right-color: $hex-daytime
-    border-bottom-color: $hex-daytime
+    border: ds.rem(5) solid transparent
+    border-right-color: ds.$hex-daytime
+    border-bottom-color: ds.$hex-daytime

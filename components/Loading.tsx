@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { icons } from '@/icons';
+import { IconLoading1, IconLoading2 } from './icons';
 
-const images = [`${icons.loading.loading1}`, `${icons.loading.loading2}`];
+const images = [`${IconLoading1}`, `${IconLoading2}`];
 
 const Loading: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

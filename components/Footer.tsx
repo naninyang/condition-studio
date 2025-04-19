@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 import styled from '@emotion/styled';
 import useFetchData from '@/hooks/useFetchData';
 import { StyleProps } from '@/types';
 import { getAddressFromDB } from '@/utils/indexedDB';
 import Anchor from './Anchor';
-import { weatherState } from '@/state/atoms';
+import { weatherAtom } from '@/state/atoms';
 import { hex } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
 
@@ -33,7 +33,7 @@ const Container = styled.footer<StyleProps>(({ isDay }) => ({
 }));
 
 export default function Footer() {
-  const weatherData = useRecoilValue(weatherState);
+  const weatherData = useAtomValue(weatherAtom);
   const [initialAddress, setInitialAddress] = useState<string>('');
 
   useEffect(() => {

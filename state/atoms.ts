@@ -1,12 +1,5 @@
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 import { AddressData, WeatherData } from '@/types';
 
-export const weatherState = atom<WeatherData>({
-  key: 'weatherState',
-  default: undefined,
-});
-
-export const addressState = atom<AddressData>({
-  key: 'addressState',
-  default: undefined,
-});
+export const weatherAtom = atom<WeatherData | undefined>(undefined);
+export const addressAtom = atom<AddressData | undefined>(undefined);

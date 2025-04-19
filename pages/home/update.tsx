@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import styled from '@emotion/styled';
-import { StyleProps, WeatherProgressBarProps } from '@/types';
-import { addressState, weatherState } from '@/state/atoms';
+import { useAtomValue } from 'jotai';
+import { addressAtom, weatherAtom } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
 import { getAddressFromDB } from '@/utils/indexedDB';
-import conditions from '@/components/Conditions';
-import colors from '@/components/Colors';
 import styles from '@/styles/Home.module.sass';
 
 export default function Update() {
-  const addressData = useRecoilValue(addressState);
-  const weatherData = useRecoilValue(weatherState);
+  const addressData = useAtomValue(addressAtom);
+  const weatherData = useAtomValue(weatherAtom);
   const [initialAddress, setInitialAddress] = useState<string>('');
 
   useEffect(() => {

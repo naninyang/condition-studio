@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
 import useFetchData from '@/hooks/useFetchData';
-import { addressState, weatherState } from '@/state/atoms';
+import { addressAtom, weatherAtom } from '@/state/atoms';
 import { getAddressFromDB } from '@/utils/indexedDB';
-import { icons } from '@/icons';
 import { StyleProps } from '@/types';
 import Anchor from './Anchor';
 import colors from './Colors';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Home.module.sass';
+import { IconUxRefresh, IconUxSettings } from './icons';
 
 const hexToRgb = (hex: string) => {
   let cleanHex = hex.replace('#', '');
@@ -25,11 +25,11 @@ const Container = styled.header<StyleProps>(({ colorItems }) => ({
 }));
 
 const RefreshIcon = styled.i({
-  background: `url(${icons.ux.refresh}) no-repeat 50% 50%/contain`,
+  background: `url(${IconUxRefresh.src}) no-repeat 50% 50%/contain`,
 });
 
 const SettingsIcon = styled.i({
-  background: `url(${icons.ux.settings}) no-repeat 50% 50%/contain`,
+  background: `url(${IconUxSettings.src}) no-repeat 50% 50%/contain`,
 });
 
 export function useDesktop() {
@@ -45,7 +45,7 @@ export default function Header() {
   const [seoulDate, setSeoulDate] = useState<string>('');
   const [seoulTime, setSeoulTime] = useState<string>('');
 
-  const addressData = useRecoilValue(addressState);
+  const addressData = useAtomValue(addressAtom);
   const [initialAddress, setInitialAddress] = useState<string>('');
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function Header() {
   }, []);
   useFetchData(initialAddress);
 
-  const weatherData = useRecoilValue(weatherState);
+  const weatherData = useAtomValue(weatherAtom);
   const getColors = (code: number, isDay: number): string => {
     const color = colors[code] || colors[1000];
     return isDay ? color.day : color.night;

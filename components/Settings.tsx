@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useMediaQuery } from 'react-responsive';
-import { isSafari } from 'react-device-detect';
+import { isIOS } from 'react-device-detect';
 import styled from '@emotion/styled';
-import { icons } from '@/icons';
 import Anchor from '@/components/Anchor';
 import { rem } from '@/styles/designSystem';
+import { IconDownloadPWA, IconDownloadSafari, IconUxLeft } from './icons';
 
 const BackwardIcon = styled.i({
-  background: `url(${icons.ux.left}) no-repeat 50% 50%/contain`,
+  background: `url(${IconUxLeft}) no-repeat 50% 50%/contain`,
 });
 
 const SafariIcon = styled.i({
-  background: `url(${icons.downloads.safari}) no-repeat 50% 50%/contain`,
+  background: `url(${IconDownloadSafari}) no-repeat 50% 50%/contain`,
 });
 
 const PwaIcon = styled.i({
-  background: `url(${icons.downloads.pwa}) no-repeat 50% 50%/contain`,
+  background: `url(${IconDownloadPWA}) no-repeat 50% 50%/contain`,
 });
 
 export function useDesktop() {
@@ -31,6 +31,10 @@ export function useDesktop() {
 export default function SettingsMenu() {
   const router = useRouter();
   const [loaded, setLoaded] = useState<string | null>(null);
+  const [isAppleOs, setIsAppleOs] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
+  const [deviceSafari, setDeviceSafari] = useState<boolean>(false);
+  const isDesktop = useDesktop();
 
   useEffect(() => {
     const storedPage = localStorage.getItem('loaded');
@@ -40,11 +44,6 @@ export default function SettingsMenu() {
   const handleBackward = () => {
     router.back();
   };
-
-  const isDesktop = useDesktop();
-
-  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
-  const [deviceSafari, setDeviceSafari] = useState<string>();
 
   const onInstallPWA = () => {
     if (deferredPrompt) {
@@ -61,45 +60,40 @@ export default function SettingsMenu() {
     }
   };
 
+  const isIPadOS = () => {
+    return navigator.userAgent.includes('Macintosh') && 'ontouchend' in document;
+  };
   useEffect(() => {
-    if (isSafari) {
-      setDeviceSafari('isSafari');
-    }
+    setDeviceSafari(isIOS || isIPadOS);
   }, []);
 
   return (
     <>
       <header>
-        {!isDesktop && (
-          <>
-            {loaded ? (
-              <button type="button" onClick={handleBackward}>
-                <BackwardIcon />
-                <span>서비스 화면으로 돌아가기</span>
-              </button>
-            ) : (
-              <Anchor href="/">
-                <BackwardIcon />
-                <span>서비스 화면으로 돌아가기</span>
-              </Anchor>
-            )}
-          </>
-        )}
-        {router.pathname === '/settings' && (
-          <>
-            {loaded ? (
-              <button type="button" onClick={handleBackward}>
-                <BackwardIcon />
-                <span>서비스 화면으로 돌아가기</span>
-              </button>
-            ) : (
-              <Anchor href="/">
-                <BackwardIcon />
-                <span>서비스 화면으로 돌아가기</span>
-              </Anchor>
-            )}
-          </>
-        )}
+        {!isDesktop &&
+          (loaded ? (
+            <button type="button" onClick={handleBackward}>
+              <BackwardIcon />
+              <span>서비스 화면으로 돌아가기</span>
+            </button>
+          ) : (
+            <Anchor href="/">
+              <BackwardIcon />
+              <span>서비스 화면으로 돌아가기</span>
+            </Anchor>
+          ))}
+        {router.pathname === '/settings' &&
+          (loaded ? (
+            <button type="button" onClick={handleBackward}>
+              <BackwardIcon />
+              <span>서비스 화면으로 돌아가기</span>
+            </button>
+          ) : (
+            <Anchor href="/">
+              <BackwardIcon />
+              <span>서비스 화면으로 돌아가기</span>
+            </Anchor>
+          ))}
         <h1>환경설정</h1>
       </header>
       <ol>
@@ -113,7 +107,7 @@ export default function SettingsMenu() {
           <Anchor href="/settings/version">버전정보</Anchor>
         </li>
       </ol>
-      {deviceSafari === 'isSafari' ? (
+      {deviceSafari ? (
         <div data-device="safari">
           <Anchor href="/settings/safari">
             <span>Safari 앱 내려받기</span>

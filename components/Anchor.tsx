@@ -1,13 +1,12 @@
 import Link from 'next/link';
 
-interface AnchorLinkProps {
+interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
   href: string;
-  [key: string]: any;
 }
 
 const domainRegex = /http[s]*:\/\/[www.]*domain\.com[/]?/;
 
-const Anchor: React.FC<AnchorLinkProps> = ({ href, ...rest }) => {
+export default function Anchor({ href, ...rest }: Props) {
   const sameDomain = domainRegex.test(href);
   let h = href;
   if (sameDomain) {
@@ -23,6 +22,4 @@ const Anchor: React.FC<AnchorLinkProps> = ({ href, ...rest }) => {
   }
 
   return <a href={h} target="_blank" rel="noopener noreferrer nofollow" {...rest} />;
-};
-
-export default Anchor;
+}

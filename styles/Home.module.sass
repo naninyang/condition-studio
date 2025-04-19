@@ -1,5 +1,3 @@
-@import './designSystem'
-
 .main
   section
     overflow: hidden
@@ -14,34 +12,34 @@
       display: flex
       justify-content: space-between
       align-items: center
-      backdrop-filter: blur(rem(27))
-      padding: calc(env(safe-area-inset-top) + rem(25)) rem(25) rem(25)
+      backdrop-filter: blur(ds.rem(27))
+      padding: calc(env(safe-area-inset-top) + ds.rem(25)) ds.rem(25) ds.rem(25)
 
       h1
-        +screen-reader-only
+        +ds.screen-reader-only
 
       p
         display: flex
         flex-direction: column
-        font-size: rem(14)
+        font-size: ds.rem(14)
         font-weight: 900
         line-height: 1.42857143
 
       .buttons
         display: flex
-        gap: rem(5)
+        gap: ds.rem(5)
 
         button, a
-          width: rem(25)
-          height: rem(25)
+          width: ds.rem(25)
+          height: ds.rem(25)
 
           span
-            +screen-reader-only
+            +ds.screen-reader-only
 
           i
             display: inline-block
-            width: rem(25)
-            height: rem(25)
+            width: ds.rem(25)
+            height: ds.rem(25)
 
         button
           background: none
@@ -50,39 +48,39 @@
       display: flex
       justify-content: center
       align-items: center
-      margin-top: rem(75)
-      padding: rem(25) rem(25)
-      backdrop-filter: blur(rem(50))
+      margin-top: ds.rem(75)
+      padding: ds.rem(25) ds.rem(25)
+      backdrop-filter: blur(ds.rem(50))
 
-      +mq(minSmall)
-        padding: rem(50) rem(25)
+      +ds.mq(minSmall)
+        padding: ds.rem(50) ds.rem(25)
 
       .footer
         display: flex
         flex-direction: column
         width: 100%
 
-        +mq(minSmall)
-          gap: rem(7)
+        +ds.mq(minSmall)
+          gap: ds.rem(7)
 
         p
-          font-size: rem(14)
+          font-size: ds.rem(14)
 
-          +mq(maxExtraSmall)
+          +ds.mq(maxExtraSmall)
             display: flex
             flex-direction: column
-            gap: rem(2)
+            gap: ds.rem(2)
 
         ul
           display: flex
-          gap: rem(12),
-          padding-top: rem(22)
+          gap: ds.rem(12),
+          padding-top: ds.rem(22)
 
-          +mq(maxExtraSmall)
+          +ds.mq(maxExtraSmall)
             justify-content: flex-end
 
-          +mq(minSmall)
-            padding-top: rem(27)
+          +ds.mq(minSmall)
+            padding-top: ds.rem(27)
 
         a
           transition: all .4s cubic-bezier(.4,0,.2,1)
@@ -90,8 +88,8 @@
           display: block
           border-bottom-width: 1px
           border-bottom-style: solid
-          padding: rem(2)
-          font-size: rem(14)
+          padding: ds.rem(2)
+          font-size: ds.rem(14)
 
           &:hover, &:focus
             font-weight: 700
@@ -101,35 +99,35 @@
               position: absolute
               bottom: 0
               left: 0
-              border-radius: rem(2)
+              border-radius: ds.rem(2)
               width: 100%
-              height: rem(2)
+              height: ds.rem(2)
 
         dl
           display: flex
-          gap: rem(2)
-          padding-top: rem(12)
+          gap: ds.rem(2)
+          padding-top: ds.rem(12)
 
-          +mq(maxExtraSmall)
+          +ds.mq(maxExtraSmall)
             flex-direction: column
 
-          +mq(minSmall)
-            padding-top: rem(7)
+          +ds.mq(minSmall)
+            padding-top: ds.rem(7)
 
           div
             display: flex
-            gap: rem(7)
-            font-size: rem(14)
+            gap: ds.rem(7)
+            font-size: ds.rem(14)
 
-            +mq(maxExtraSmall)
+            +ds.mq(maxExtraSmall)
               justify-content: flex-end
 
-            +mq(minSmall)
+            +ds.mq(minSmall)
               &::before
                 content: '|'
-                padding-left: rem(7)
-                padding-right: rem(2)
-                font-size: rem(10)
+                padding-left: ds.rem(7)
+                padding-right: ds.rem(2)
+                font-size: ds.rem(10)
 
               &:first-of-type::before
                 display: none
@@ -139,13 +137,13 @@
             text-transform: uppercase
 
           dt, dd
-            font-size: rem(12)
+            font-size: ds.rem(12)
 
   .summary
-    padding-top: calc(env(safe-area-inset-top) + rem(90))
+    padding-top: calc(env(safe-area-inset-top) + ds.rem(90))
     min-height: 100dvh
 
-    +mq(minLarge)
+    +ds.mq(minLarge)
       display: flex
       flex-direction: column
 
@@ -155,43 +153,43 @@
         align-items: center
         flex: 1
         margin: 0 auto
-        padding: 0 rem(25)
-        max-width: rem(1920)
+        padding: 0 ds.rem(25)
+        max-width: ds.rem(1920)
 
     dl
       display: flex
-      gap: rem(17)
+      gap: ds.rem(17)
 
-      +mq(maxMedium)
-        margin-top: rem(52)
+      +ds.mq(maxMedium)
+        margin-top: ds.rem(52)
         flex-direction: column
 
-      +mq(minLarge)
+      +ds.mq(minLarge)
         flex-wrap: wrap
         justify-content: center
-        gap: rem(37)
+        gap: ds.rem(37)
 
       dt
-        +screen-reader-only
+        +ds.screen-reader-only
 
       dd
         display: inline-flex
         flex-direction: column
         justify-content: center
-        border-radius: 0 rem(24)rem(24) 0
-        padding: rem(12) rem(27) rem(12) rem(25)
-        background-color: $hex-white
-        color: $hex-dark
+        border-radius: 0 ds.rem(24)ds.rem(24) 0
+        padding: ds.rem(12) ds.rem(27) ds.rem(12) ds.rem(25)
+        background-color: ds.$hex-white
+        color: ds.$hex-dark
 
-        +mq(minLarge)
-          border-radius: rem(48)
-          padding: rem(12) rem(37)
+        +ds.mq(minLarge)
+          border-radius: ds.rem(48)
+          padding: ds.rem(12) ds.rem(37)
 
         div
           display: flex
           align-items: center
-          gap: rem(5)
-          font-size: rem(16)
+          gap: ds.rem(5)
+          font-size: ds.rem(16)
 
           i
             font-style: normal
@@ -202,56 +200,56 @@
               background-repeat: no-repeat
               background-position: 50% 50%
               background-size: contain
-              width: rem(20)
-              height: rem(20)
+              width: ds.rem(20)
+              height: ds.rem(20)
 
           span
             display: flex
             align-items: center
-            gap: rem(7)
+            gap: ds.rem(7)
 
             strong
               font-weight: 400
 
               em
-                font-size: rem(14)
+                font-size: ds.rem(14)
 
             em
-              font-size: rem(20)
+              font-size: ds.rem(20)
               font-style: normal
               font-weight: 700
               letter-spacing: -.07em
 
   .contain
     display: flex
-    gap: rem(25)
-    padding-top: rem(52)
+    gap: ds.rem(25)
+    padding-top: ds.rem(52)
 
-    +mq(maxMedium)
+    +ds.mq(maxMedium)
       flex-direction: column
 
-    +mq(minLarge)
+    +ds.mq(minLarge)
       margin: 0 auto
-      padding: rem(52) rem(25) 0
-      max-width: rem(1920)
+      padding: ds.rem(52) ds.rem(25) 0
+      max-width: ds.rem(1920)
 
     h2
-      padding: 0 rem(25)
-      font-size: rem(16)
+      padding: 0 ds.rem(25)
+      font-size: ds.rem(16)
       font-weight: 900
       line-height: 1
-      color: $hex-black
+      color: ds.$hex-black
 
     .module
       display: flex
       flex-direction: column
-      gap: rem(17)
-      background-color: $hex-white
+      gap: ds.rem(17)
+      background-color: ds.$hex-white
       position: relative
       margin: 0 auto
-      border-radius: rem(12)
-      padding: rem(17) 0
-      width: calc(100% - rem(50))
+      border-radius: ds.rem(12)
+      padding: ds.rem(17) 0
+      width: calc(100% - ds.rem(50))
 
   .forecast
     .contain
@@ -261,10 +259,10 @@
         &::before, &::after
           content: ''
           position: absolute
-          top: rem(17)
-          bottom: rem(17)
+          top: ds.rem(17)
+          bottom: ds.rem(17)
           z-index: 1
-          width: rem(25)
+          width: ds.rem(25)
 
         &::before
           left: 0
@@ -279,7 +277,7 @@
           overflow: auto
           margin: 0 auto
           width: 100%
-          height: rem(160)
+          height: ds.rem(160)
 
         dl
           position: absolute
@@ -287,16 +285,16 @@
           left: 0
           display: flex
           flex-wrap: nowrap
-          gap: rem(12)
-          padding: 0 rem(25)
+          gap: ds.rem(12)
+          padding: 0 ds.rem(25)
           white-space: nowrap
 
           > div
             display: flex
             flex-direction: column
-            gap: rem(7)
-            +coln
-            width: rem(95)
+            gap: ds.rem(7)
+            +ds.coln
+            width: ds.rem(95)
 
             &:first-of-type dt
               font-weight: 700
@@ -305,75 +303,75 @@
                 content: '현재'
 
               span
-                +screen-reader-only
+                +ds.screen-reader-only
 
           i, em
             font-style: normal
 
           dt, dd
-            color: $hex-dark
+            color: ds.$hex-dark
             text-align: center
 
           dt
-            font-size: rem(16)
+            font-size: ds.rem(16)
             line-height: 1
-            color: $hex-black
+            color: ds.$hex-black
 
           dd
             display: flex
             flex-direction: column
-            gap: rem(7)
+            gap: ds.rem(7)
 
             div
               display: flex
               flex-direction: column
-              gap: rem(5)
-              border-top: 1px solid $hex-dark
-              padding-top: rem(7)
+              gap: ds.rem(5)
+              border-top: 1px solid ds.$hex-dark
+              padding-top: ds.rem(7)
 
               span
                 display: flex
                 flex-direction: column
-                gap: rem(5)
-                font-size: rem(16)
+                gap: ds.rem(5)
+                font-size: ds.rem(16)
                 letter-spacing: -.07em
                 line-height: 1
 
             ul
               display: flex
               flex-direction: column
-              gap: rem(5)
+              gap: ds.rem(5)
 
               li
-                font-size: rem(14)
+                font-size: ds.rem(14)
                 letter-spacing: -.07em
                 line-height: 1
 
       .day
-        +mq(minLarge)
+        +ds.mq(minLarge)
           .list
             flex: 1
 
         dl
           display: flex
           flex-direction: column
-          padding: 0 rem(25)
+          padding: 0 ds.rem(25)
 
-          +mq(maxMedium)
-            gap: rem(17)
+          +ds.mq(maxMedium)
+            gap: ds.rem(17)
 
-          +mq(minLarge)
+          +ds.mq(minLarge)
             justify-content: space-between
-            padding: rem(25)
+            padding: ds.rem(25)
             height: 100%
 
           dt, dd
-            font-size: rem(16)
-            color: $hex-dark
+            font-size: ds.rem(16)
+            color: ds.$hex-dark
 
           > div
             display: flex
-            gap: rem(12)
+            gap: ds.rem(12)
 
             &:first-of-type dt
               font-weight: 700
@@ -381,35 +379,35 @@
               span
                 &::after
                   content: '오늘'
-                  font-size: rem(16)
+                  font-size: ds.rem(16)
 
                 em
-                  +screen-reader-only
+                  +ds.screen-reader-only
 
             dt
               display: flex
               align-items: center
-              +col-auto
-              width: rem(60)
+              +ds.col-auto
+              width: ds.rem(60)
               line-height: 1
 
               span
                 display: flex
                 justify-content: space-between
                 align-items: center
-                +col
-                font-size: rem(12)
-                color: $hex-dark
+                +ds.col
+                font-size: ds.rem(12)
+                color: ds.$hex-dark
 
                 strong, em
-                  +col
+                  +ds.col
 
                 em
-                  font-size: rem(16)
+                  font-size: ds.rem(16)
                   font-style: normal
 
             dd
-              +col
+              +ds.col
 
               i, em
                 font-style: normal
@@ -417,27 +415,27 @@
               div
                 display: flex
                 align-items: center
-                gap: rem(7)
+                gap: ds.rem(7)
 
               i + em
-                +screen-reader-only
+                +ds.screen-reader-only
 
               span
-                width: rem(60)
+                width: ds.rem(60)
                 text-align: right
 
               .progress
-                +col
-                background-color: $hex-light
+                +ds.col
+                background-color: ds.$hex-light
                 position: relative
-                border-radius: rem(5)
-                height: rem(5)
+                border-radius: ds.rem(5)
+                height: ds.rem(5)
 
                 .bar
                   background-color: blue
                   position: absolute
-                  border-radius: rem(5)
-                  min-width: rem(5)
+                  border-radius: ds.rem(5)
+                  min-width: ds.rem(5)
                   height: 100%
 
   .everything
@@ -445,66 +443,66 @@
       .primary
         .list
           display: flex
-          gap: rem(12)
-          padding: 0 rem(25)
+          gap: ds.rem(12)
+          padding: 0 ds.rem(25)
 
-          +mq(minLarge)
+          +ds.mq(minLarge)
             flex: 1
             align-items: center
 
           i
-            font-size: rem(32)
+            font-size: ds.rem(32)
             font-style: normal
 
           dl
             display: flex
-            +col
-            gap: rem(5)
+            +ds.col
+            gap: ds.rem(5)
 
             div
               display: flex
               flex-direction: column
-              gap: rem(7)
-              +coln
-              width: rem(55)
+              gap: ds.rem(7)
+              +ds.coln
+              width: ds.rem(55)
 
             dt, dd
-              font-size: rem(14)
+              font-size: ds.rem(14)
               line-height: 1
               letter-spacing: -.07em
 
             dt
-              color: $hex-black
+              color: ds.$hex-black
 
       .secondary
         .list
           display: flex
-          gap: rem(12)
-          padding: 0 rem(25)
+          gap: ds.rem(12)
+          padding: 0 ds.rem(25)
 
           i
-            font-size: rem(32)
+            font-size: ds.rem(32)
             font-style: normal
 
           dl
             display: flex
-            +col
-            gap: rem(5)
+            +ds.col
+            gap: ds.rem(5)
 
             div
               display: flex
               flex-direction: column
-              gap: rem(7)
-              +coln
-              width: rem(107)
+              gap: ds.rem(7)
+              +ds.coln
+              width: ds.rem(107)
 
             dt, dd
-              font-size: rem(14)
+              font-size: ds.rem(14)
               line-height: 1
               letter-spacing: -.07em
 
             dt
-              color: $hex-black
+              color: ds.$hex-black
 
   .riseset
     .contain
@@ -512,154 +510,154 @@
         .list
           dl
             display: flex
-            gap: rem(12)
-            padding: 0 rem(25) rem(25)
+            gap: ds.rem(12)
+            padding: 0 ds.rem(25) ds.rem(25)
 
             div
               display: flex
               flex-direction: column-reverse
-              gap: rem(10)
+              gap: ds.rem(10)
 
               &:first-of-type
                 text-align: right
 
               &.now
-                +col
+                +ds.col
 
                 dt
-                  +screen-reader-only
+                  +ds.screen-reader-only
 
                 dd
                   display: flex
                   flex-direction: column
-                  gap: rem(5)
+                  gap: ds.rem(5)
 
               dt, dd
                 line-height: 1
 
               dt
-                font-size: rem(12)
-                color: $hex-dark
+                font-size: ds.rem(12)
+                color: ds.$hex-dark
 
               dd
-                font-size: rem(14)
+                font-size: ds.rem(14)
                 font-weight: 700
-                color: $hex-black
+                color: ds.$hex-black
 
                 .progress
-                  background-color: $hex-light
-                  border-radius: rem(12)
+                  background-color: ds.$hex-light
+                  border-radius: ds.rem(12)
                   width: 100%
-                  height: rem(12)
+                  height: ds.rem(12)
 
                   > span
-                    +screen-reader-only
+                    +ds.screen-reader-only
 
                   .bar
                     position: relative
-                    border-radius: rem(12)
-                    min-width: rem(12)
-                    height: rem(12)
+                    border-radius: ds.rem(12)
+                    min-width: ds.rem(12)
+                    height: ds.rem(12)
 
                     i
                       display: flex
                       justify-content: center
                       align-items: center
-                      background-color: $hex-white
+                      background-color: ds.$hex-white
                       position: absolute
-                      top: rem(-10)
-                      right: rem(-17)
-                      border-radius: rem(33)
-                      width: rem(33)
-                      height: rem(33)
-                      font-size: rem(23)
+                      top: ds.rem(-10)
+                      right: ds.rem(-17)
+                      border-radius: ds.rem(33)
+                      width: ds.rem(33)
+                      height: ds.rem(33)
+                      font-size: ds.rem(23)
                       font-style: normal
 
                     span
                       position: absolute
-                      top: rem(25)
-                      right: rem(-25)
-                      font-size: rem(12)
+                      top: ds.rem(25)
+                      right: ds.rem(-25)
+                      font-size: ds.rem(12)
                       white-space: nowrap
 
       .moon
         .list
           display: flex
-          gap: rem(12)
-          padding: 0 rem(25)
+          gap: ds.rem(12)
+          padding: 0 ds.rem(25)
 
-          +mq(minLarge)
+          +ds.mq(minLarge)
             flex: 1
             align-items: center
 
           i
-            font-size: rem(32)
+            font-size: ds.rem(32)
             font-style: normal
 
           dl
             display: flex
-            +col
-            gap: rem(5)
+            +ds.col
+            gap: ds.rem(5)
 
             div
               display: flex
               flex-direction: column
-              gap: rem(7)
-              +coln
-              width: rem(80)
+              gap: ds.rem(7)
+              +ds.coln
+              width: ds.rem(80)
 
             dt, dd
-              font-size: rem(14)
+              font-size: ds.rem(14)
               line-height: 1
               letter-spacing: -.07em
 
             dt
-              color: $hex-black
+              color: ds.$hex-black
 
   .update
-    padding-bottom: rem(77)
+    padding-bottom: ds.rem(77)
 
     .contain
       .module
         width: auto
 
-        +mq(maxMedium)
-          width: calc(100% - rem(50))
+        +ds.mq(maxMedium)
+          width: calc(100% - ds.rem(50))
 
         p
-          padding: 0 rem(25)
-          font-size: rem(14)
-          color: $hex-dark
+          padding: 0 ds.rem(25)
+          font-size: ds.rem(14)
+          color: ds.$hex-dark
 
         .list
           dl
             display: flex
             flex-direction: column
-            gap: rem(27)
-            padding: 0 rem(25) rem(25)
+            gap: ds.rem(27)
+            padding: 0 ds.rem(25) ds.rem(25)
 
-            +mq(minLarge)
-              gap: rem(12)
+            +ds.mq(minLarge)
+              gap: ds.rem(12)
 
             div
               display: flex
-              gap: rem(7)
+              gap: ds.rem(7)
 
-              +mq(maxMedium)
+              +ds.mq(maxMedium)
                 flex-direction: column
 
-              +mq(minLarge)
+              +ds.mq(minLarge)
                 justify-content: space-between
-                gap: rem(27)
+                gap: ds.rem(27)
 
               dt, dd
                 line-height: 1
 
               dt
-                font-size: rem(14)
-                color: $hex-dark
+                font-size: ds.rem(14)
+                color: ds.$hex-dark
 
               dd
-                font-size: rem(16)
+                font-size: ds.rem(16)
                 font-weight: 700
-                color: $hex-accent
+                color: ds.$hex-accent

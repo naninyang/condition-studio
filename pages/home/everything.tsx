@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 import styled from '@emotion/styled';
 import { StyleProps } from '@/types';
-import { addressState, weatherState } from '@/state/atoms';
+import { addressAtom, weatherAtom } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
 import { getAddressFromDB } from '@/utils/indexedDB';
 import colors from '@/components/Colors';
@@ -18,8 +18,8 @@ const Unit = styled.em<StyleProps>(({ colorItems }) => ({
 }));
 
 export default function Everything() {
-  const addressData = useRecoilValue(addressState);
-  const weatherData = useRecoilValue(weatherState);
+  const addressData = useAtomValue(addressAtom);
+  const weatherData = useAtomValue(weatherAtom);
 
   const [initialAddress, setInitialAddress] = useState<string>('');
 

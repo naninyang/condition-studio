@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Noto_Sans_KR } from 'next/font/google';
 import localFont from 'next/font/local';
 import Script from 'next/script';
-import { RecoilRoot } from 'recoil';
+import { Provider } from 'jotai';
 import { GA_TRACKING_ID, pageview } from '@/utils/gtag';
 import Backgrounds from '@/components/Backgrounds';
 import '@/styles/globals.sass';
@@ -14,13 +14,13 @@ const fontNoto = Noto_Sans_KR({
   subsets: ['cyrillic'],
 });
 
-const weatherIcons = localFont({ src: '../fonts/dripicons-weather.woff' });
+const weatherIcons = localFont({ src: './fonts/dripicons-weather.woff' });
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       const registInit = async () => {
-        const registration = await navigator.serviceWorker.register('/service-worker.js');
+        const registration = await navigator.serviceWorker.register('/sw.js');
         registration.waiting?.postMessage('SKIP_WAITING');
       };
       registInit();
@@ -40,7 +40,9 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   return (
-    <RecoilRoot>
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error 타입 시스템 충돌 무시 (React 19 + Jotai 2.1.x 문제)
+    <Provider>
       <Script id="google-analytics">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -77,6 +79,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </style>
       <Backgrounds />
       <Component {...pageProps} />
-    </RecoilRoot>
+    </Provider>
   );
 }

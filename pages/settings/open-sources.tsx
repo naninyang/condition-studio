@@ -4,15 +4,15 @@ import { useMediaQuery } from 'react-responsive';
 import styled from '@emotion/styled';
 import fs from 'fs';
 import path from 'path';
-import { icons } from '@/icons';
 import Seo from '@/components/Seo';
 import Anchor from '@/components/Anchor';
 import SettingsMenu from '@/components/Settings';
 import { rem } from '@/styles/designSystem';
 import styles from '@/styles/Settings.module.sass';
+import { IconUxLeft } from '@/components/icons';
 
 const BackwardIcon = styled.i({
-  background: `url(${icons.ux.left}) no-repeat 50% 50%/contain`,
+  background: `url(${IconUxLeft.src}) no-repeat 50% 50%/contain`,
 });
 
 export function useDesktop() {
