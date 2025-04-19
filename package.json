@@ -11,7 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "idb": "^8.0.2",
+    "idb": "^7.1.1",
     "jotai": "^2.12.3",
     "next": "15.3.1",
     "react": "^19.0.0",
