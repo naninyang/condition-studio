@@ -74,7 +74,7 @@ export default function Location() {
         setError('찾는 위치가 없습니다.');
       }
     } catch (err) {
-      setError('검색 중 에러가 발생했습니다.');
+      setError(`${err}: 검색 중 에러가 발생했습니다.`);
     }
   };
 

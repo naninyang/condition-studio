@@ -13,10 +13,6 @@ const Icon = styled.i<StyleProps>(({ colorItems }) => ({
   color: `${colorItems}`,
 }));
 
-const Unit = styled.em<StyleProps>(({ colorItems }) => ({
-  color: `${colorItems}`,
-}));
-
 export default function Everything() {
   const addressData = useAtomValue(addressAtom);
   const weatherData = useAtomValue(weatherAtom);

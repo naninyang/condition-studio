@@ -13,10 +13,10 @@ import styles from '@/styles/Home.module.sass';
 import { IconUxRefresh, IconUxSettings } from './icons';
 
 const hexToRgb = (hex: string) => {
-  let cleanHex = hex.replace('#', '');
-  let r = parseInt(cleanHex.substring(0, 2), 16);
-  let g = parseInt(cleanHex.substring(2, 4), 16);
-  let b = parseInt(cleanHex.substring(4, 6), 16);
+  const cleanHex = hex.replace('#', '');
+  const r = parseInt(cleanHex.substring(0, 2), 16);
+  const g = parseInt(cleanHex.substring(2, 4), 16);
+  const b = parseInt(cleanHex.substring(4, 6), 16);
   return `${r}, ${g}, ${b}`;
 };
 

@@ -8,15 +8,15 @@ import { rem } from '@/styles/designSystem';
 import { IconDownloadPWA, IconDownloadSafari, IconUxLeft } from './icons';
 
 const BackwardIcon = styled.i({
-  background: `url(${IconUxLeft}) no-repeat 50% 50%/contain`,
+  background: `url(${IconUxLeft.src}) no-repeat 50% 50%/contain`,
 });
 
 const SafariIcon = styled.i({
-  background: `url(${IconDownloadSafari}) no-repeat 50% 50%/contain`,
+  background: `url(${IconDownloadSafari.src}) no-repeat 50% 50%/contain`,
 });
 
 const PwaIcon = styled.i({
-  background: `url(${IconDownloadPWA}) no-repeat 50% 50%/contain`,
+  background: `url(${IconDownloadPWA.src}) no-repeat 50% 50%/contain`,
 });
 
 export function useDesktop() {
@@ -31,9 +31,8 @@ export function useDesktop() {
 export default function SettingsMenu() {
   const router = useRouter();
   const [loaded, setLoaded] = useState<string | null>(null);
-  const [isAppleOs, setIsAppleOs] = useState(false);
+  const [isiOS, setIsiOS] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
-  const [deviceSafari, setDeviceSafari] = useState<boolean>(false);
   const isDesktop = useDesktop();
 
   useEffect(() => {
@@ -64,7 +63,7 @@ export default function SettingsMenu() {
     return navigator.userAgent.includes('Macintosh') && 'ontouchend' in document;
   };
   useEffect(() => {
-    setDeviceSafari(isIOS || isIPadOS);
+    setIsiOS(isIOS || isIPadOS);
   }, []);
 
   return (
@@ -107,7 +106,7 @@ export default function SettingsMenu() {
           <Anchor href="/settings/version">버전정보</Anchor>
         </li>
       </ol>
-      {deviceSafari ? (
+      {isiOS ? (
         <div data-device="safari">
           <Anchor href="/settings/safari">
             <span>Safari 앱 내려받기</span>

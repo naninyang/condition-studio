@@ -30,11 +30,6 @@ export default function Riseset() {
   }, []);
   useFetchData(initialAddress);
 
-  const getColors = (code: number, isDay: number): string => {
-    const color = colors[code] || colors[1000];
-    return isDay ? color.day : color.night;
-  };
-
   function formatTime(timeString: string) {
     const todayDateString = new Date().toDateString();
     const time = new Date(`${todayDateString} ${timeString}`);
