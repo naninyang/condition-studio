@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { Noto_Sans_KR } from 'next/font/google';
 import localFont from 'next/font/local';
 import Script from 'next/script';
-import { Provider } from 'jotai';
+import { Provider as ProviderJotai } from 'jotai';
 import { GA_TRACKING_ID, pageview } from '@/utils/gtag';
 import Backgrounds from '@/components/Backgrounds';
 import '@/styles/globals.sass';
@@ -15,6 +15,8 @@ const fontNoto = Noto_Sans_KR({
 });
 
 const weatherIcons = localFont({ src: './fonts/dripicons-weather.woff' });
+
+const Provider = ProviderJotai as unknown as (props: { children: ReactNode }) => JSX.Element;
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -40,8 +42,6 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   return (
-    // @ts-expect-error 타입 시스템 충돌 무시 (React 19 + Jotai 2.1.x 문제)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     <Provider>
       <Script id="google-analytics">
         {`
