@@ -5,7 +5,6 @@ import { SunrisesetProgressBarProps, StyleProps } from '@/types';
 import { addressAtom, weatherAtom } from '@/state/atoms';
 import useFetchData from '@/hooks/useFetchData';
 import { getAddressFromDB } from '@/utils/indexedDB';
-import colors from '@/components/Colors';
 import styles from '@/styles/Home.module.sass';
 import MoonName from '@/components/Moon';
 

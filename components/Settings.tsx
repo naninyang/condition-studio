@@ -7,6 +7,14 @@ import Anchor from '@/components/Anchor';
 import { rem } from '@/styles/designSystem';
 import { IconDownloadPWA, IconDownloadSafari, IconUxLeft } from './icons';
 
+type BeforeInstallPromptEvent = Event & {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{
+    outcome: 'accepted' | 'dismissed';
+    platform: string;
+  }>;
+};
+
 const BackwardIcon = styled.i({
   background: `url(${IconUxLeft.src}) no-repeat 50% 50%/contain`,
 });
@@ -46,9 +54,10 @@ export default function SettingsMenu() {
 
   const onInstallPWA = () => {
     if (deferredPrompt) {
-      const promptEvent = deferredPrompt as any;
+      const promptEvent = deferredPrompt as BeforeInstallPromptEvent;
+
       promptEvent.prompt();
-      promptEvent.userChoice.then((choiceResult: any) => {
+      promptEvent.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
           console.log('User accepted the install prompt');
         } else {
